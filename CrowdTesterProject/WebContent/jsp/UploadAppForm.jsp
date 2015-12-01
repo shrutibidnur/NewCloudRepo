@@ -24,7 +24,7 @@
                     </label>
                     <form:input path="description" type="text" class="long"/>
                 </p>
-                <p>
+                <%-- <p>
                     <label>Product OS*
                     </label>
                      <form:select path ="productOS">
@@ -35,7 +35,7 @@
                     </form:select>
                     <label class="obinfo">* obligatory fields
                     </label>
-                </p>
+                </p> --%>
             </fieldset>
             <fieldset class="row2">
                 <legend>Further Information
@@ -54,24 +54,24 @@
                          <form:option value="hindi">Hindi</form:option>
                     </form:select>
                 </p>
-                <p>
+               <%--  <p>
                     <label>App Provider
                     </label>
-                    <form:input path ="appVendorUsername" type="text" maxlength="10"/>
-                </p>
+                    <form:input path ="appVendorUsername" type="text"  maxlength="10"/>
+                </p> --%>
                 <%-- <p>
                     <label class="optional">App Vendor Username
                     </label>
                     <form:input path ="appVendorUsername" type="text" class="long"/>
                 </p> --%>
                 <p>
-                    <label>Upload app file
+                    <label>Upload app file*
                     </label>
                     <form:input path="downloadLink" class="long" type="text" value="Copy the link here" />
 
                 </p>
                  <p>
-                    <label class="optional">Upload app document file
+                    <label >Upload app document file
                     </label>
                     <form:input  path="appDocument" class="long" type="text"/>
 
@@ -84,7 +84,7 @@
                 </legend>
                 
                 <p>
-                    <label>Test Type *</label> 
+                    <label>Test Type </label> 
                     <form:input path="testType" type="text" />
                 </p>
                   <p>
@@ -185,11 +185,11 @@
                 </input>
                 </p>
                 -->  
-                  <label class="optional">Date sample
+                  <label>Test Deadline* 
                     </label>
                     <form:input path ="testDeadLine" type="text" class="long"/>
                 
-                 <p>
+                 <%-- <p>
                     <label class="long">Reporting Languages *
                     </label>
                      <form:select path="reportingLanguage">
@@ -198,7 +198,7 @@
                          <form:option value="Mandarin Chinese">Mandarin Chinese</form:option>
                          <form:option value="hindi">Hindi</form:option>
                     </form:select>
-                </p>
+                </p> --%>
 				
               <p>
              
@@ -213,6 +213,7 @@
                     <label>*  I accept the <a href="SLA_Tester.txt">Terms and Conditions</a></label>
                 </p>
             </fieldset>
+            <p> <div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div></p>
             <div><button class="button">Continue Uploading &raquo;</button></div>
         
            </form:form>

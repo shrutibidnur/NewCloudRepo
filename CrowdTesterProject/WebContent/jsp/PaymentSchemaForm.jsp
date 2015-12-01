@@ -62,6 +62,7 @@
 		</span> -->
 		 
 		</li>
+		<p><div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div></p>
 			
 					<li class="buttons">
 					<button type="button" id="calculateAmount" value="calculateAmount">Calculate Amount</button>

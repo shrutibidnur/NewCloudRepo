@@ -57,10 +57,10 @@ public class AppVendorController {
 	@RequestMapping("/showAppVendorDashboard")
 	public String showAppVendorDashboard(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("appVendorDetails") AppVendorDetails appVendorDetails, Model model){
-		
+		System.out.println("dashboard:"+appVendorDetails);
 		HttpSession session = request.getSession();
 		//session.setAttribute("sessionAppVendorDetails", appVendorDetails);
-		session.getAttribute("sessionAppVendorDetails");
+		//session.getAttribute("sessionAppVendorDetails");
 		model.addAttribute("appVendorDetails", appVendorDetails);
 		
 		return "AppVendorDashboard";
@@ -73,6 +73,7 @@ public class AppVendorController {
 		HttpSession session = request.getSession();
 		appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
 		System.out.println("profile"+appVendorDetails);
+		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
 		
 		
 		model.addAttribute("appVendorDetails", appVendorDetails);
@@ -84,6 +85,10 @@ public class AppVendorController {
 	public String showAssistform(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("appVendorDetails") AppVendorDetails appVendorDetails, Model model){
 		System.out.println("HIiiiii");
+		HttpSession session = request.getSession();
+		appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
+		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
+		
 		model.addAttribute("appVendorDetails", appVendorDetails);
 		return "AppVendorAssistForm";
 	}
@@ -93,7 +98,10 @@ public class AppVendorController {
 	public String showBillingform(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("uploadAppBO") ApplicationDetails UploadAppBO, Model model){
 		System.out.println("HIiiiii");
+		HttpSession session = request.getSession();
+		AppVendorDetails appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
 		model.addAttribute("UploadAppBO", UploadAppBO);
+		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
 		return "UploadAppOutline";
 	}
 	@RequestMapping("/editAppVendorProfile")
@@ -102,6 +110,8 @@ public class AppVendorController {
 		System.out.println("Edit And Save App Vendor Details :: METHODNAME :: editAppVendorProfile");
 		HttpSession session = request.getSession();
 		ModelAndView modelAndView = new ModelAndView();
+		//session.setAttribute("sessionAppVendorDetails", appVendorDetails);
+		
 		if (appVendorDetails.getCompanyName() == null || appVendorDetails.getCompanyName() == "") {
 			modelAndView.addObject("ERROR", "Please provide Company Name. Save was unsuccessful");
 			modelAndView.setViewName("/AppVendorProfileForm");
@@ -121,6 +131,8 @@ public class AppVendorController {
 		}
 		
 		AppVendorDetails oldAppVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
+		//oldAppVendorDetails.setUserName(appVendorDetails.getUserName());
+		
 		oldAppVendorDetails.setCompanyName(appVendorDetails.getCompanyName());
 		oldAppVendorDetails.setContactEmail(appVendorDetails.getContactEmail());
 		//oldAppVendorDetails.setAge(appVendorDetails.getPhoneNumber());
@@ -131,6 +143,8 @@ public class AppVendorController {
 		oldAppVendorDetails.setPassword(appVendorDetails.getPassword());
 		System.out.println(oldAppVendorDetails);
 		String result = appVendorService.editAppVendorProfile(oldAppVendorDetails);
+		modelAndView.addObject("appVendorDetails", oldAppVendorDetails);
+		session.setAttribute("sessionAppVendorDetails", oldAppVendorDetails);
 		if (result.equalsIgnoreCase("SUCCESS")) {
 			modelAndView.addObject("ERROR", "");
 			modelAndView.setViewName("/AppVendorProfileForm");
@@ -151,8 +165,31 @@ public class AppVendorController {
 		
 		System.out.println("HI shib");
 		uploadAppBO.setCost(0);
+		ModelAndView modelAndView = new ModelAndView();
 		//String result = appVendorService.saveAppDetails(uploadAppBO);
 		System.out.println("HIiiiii");
+		if (uploadAppBO.getAppName() == null || uploadAppBO.getAppName() == "") {
+			modelAndView.addObject("ERROR", "Please provide Application Name.");
+			modelAndView.setViewName("/UploadAppOutline");
+			return modelAndView;
+		}
+		if (uploadAppBO.getDescription() == null || uploadAppBO.getDescription() == "") {
+			modelAndView.addObject("ERROR", "Please provide Application description.");
+			modelAndView.setViewName("/UploadAppOutline");
+			return modelAndView;
+		}
+		if (uploadAppBO.getDownloadLink() == null || uploadAppBO.getDownloadLink() == "") {
+			modelAndView.addObject("ERROR", "Please provide Application downlink link URL.");
+			modelAndView.setViewName("/UploadAppOutline");
+			return modelAndView;
+		}
+		if (uploadAppBO.getTestDeadLine() == null || uploadAppBO.getTestDeadLine() == "") {
+			modelAndView.addObject("ERROR", "Please provide Application deadline.");
+			modelAndView.setViewName("/UploadAppOutline");
+			return modelAndView;
+		}
+		
+		modelAndView.addObject("ERROR", "");
 		AppPlatformDetailsBO appPlatformDetailsBO = new AppPlatformDetailsBO();
 		model.addAttribute("appPlatformDetailsBO", appPlatformDetailsBO);
 		List<String> testPlatformList = new ArrayList<String>();
@@ -166,21 +203,50 @@ public class AppVendorController {
 		System.out.println("SAVED APPLICATION DETAILS ::: " + uploadAppBO);
 		*/
 		HttpSession session = request.getSession();
+		AppVendorDetails appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
+		//uploadAppBO.setAppVendorUsername(appVendorDetails.getUserName());
 		session.setAttribute("sessionAppDetails", uploadAppBO);
+		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
+		modelAndView.addObject("ERROR", "");
 		return new ModelAndView("PaymentSchemaOutline", "appPlatformDetailsBO", appPlatformDetailsBO);
 //		return "PaymentSchemaForm";
 	}
 	
 	@RequestMapping("/uploadApplication")
-	public String uploadApplication(HttpServletRequest request,
+	public ModelAndView uploadApplication(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("appPlatformDetailsBO") AppPlatformDetailsBO appPlatformDetailsBO, Model model){
 		
 		HttpSession session = request.getSession();
 		ApplicationDetails appDetails = (ApplicationDetails) session.getAttribute("sessionAppDetails");
+		//HttpSession session = request.getSession();
+		AppVendorDetails appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
 		
+		appDetails.setAppVendorUsername(appVendorDetails);
+		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
+		ModelAndView modelAndView = new ModelAndView();
+		if (appPlatformDetailsBO.getNo_of_Testers() == 0 ){
+			modelAndView.addObject("ERROR", "No. of testers cannot be zero.");
+			
+			modelAndView.setViewName("/PaymentSchemaOutline");
+			return modelAndView;
+		}
 		//appPlatformDetailsBO.setApp_Details_Application_ID(appDetails);
 		String testingPlatform = "";
 		System.out.println("ENTERED METHOD ::: uploadApplication ::: AppPlatformDetailsBO ::: " +appPlatformDetailsBO);
+		
+		if (appPlatformDetailsBO.getTestPlatformList() == null ){
+			modelAndView.addObject("ERROR", "No. of platforms cannot be zero.Select atleast one");
+			List<String> testPlatformList = new ArrayList<String>();
+			testPlatformList.add("iOS");
+			testPlatformList.add("Android");
+			testPlatformList.add("Windows");
+			testPlatformList.add("Blackberry");
+			appPlatformDetailsBO.setTestPlatformList(testPlatformList);
+			
+
+			modelAndView.setViewName("/PaymentSchemaOutline");
+			return modelAndView;
+		}
 		Iterator<String> iterator = appPlatformDetailsBO.getTestPlatformList().iterator();
 		while (iterator.hasNext()) {
 			testingPlatform = testingPlatform + iterator.next() + "#$#";
@@ -192,13 +258,22 @@ public class AppVendorController {
 		appPlatformDetailsBO.setTestingPlatform(testingPlatform);
 		appPlatformDetailsBO.setNo_of_testing_Platform(appPlatformDetailsBO.getTestPlatformList().size());
 		System.out.println("AFTER CHANGES ::: " +appPlatformDetailsBO);
+	
+		
+		if (appPlatformDetailsBO.getCost() == 0 ){
+			modelAndView.addObject("ERROR", "Cost cannot be zero, please calculate amount");
+			modelAndView.setViewName("/PaymentSchemaOutline");
+			return modelAndView;
+		}
 		
 		
 		String result = appVendorService.saveAppDetails(appDetails,appPlatformDetailsBO);
 		
 		System.out.println("saving app and platform details, result = "+result);
-		
-		return "SuccessPage";
+		modelAndView.addObject("ERROR", "");
+		modelAndView.setViewName("/PaymentSuccessOutline");
+		return modelAndView;
+		//return "PaymentSuccessOutline";
 	}
 	
 	@RequestMapping("/ajaxCalculateAmount")

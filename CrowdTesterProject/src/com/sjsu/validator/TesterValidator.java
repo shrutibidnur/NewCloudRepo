@@ -42,7 +42,7 @@ public class TesterValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","confirmPassword");
 		
 		
-		/*final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." +
+		final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." +
 				"[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" +
 				"(\\.[A-Za-z]{2,})$";
 
@@ -51,28 +51,17 @@ public class TesterValidator implements Validator {
 		 pattern = Pattern.compile(EMAIL_PATTERN);
 		 
 		 matcher = pattern.matcher(testerDetails.getEmail());
-			if(!matcher.matches()){
+		
+		 if(testerDetails.getEmail() == null || testerDetails.getEmail().length() != 0) 
+ 	    	{if(!matcher.matches()){
 					
 				errors.rejectValue("email", "Pattern.appVendorDetails.email");
-			}
+			}}
 		
-			//String expression = "^(?=.{7,32}$)(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*((\\s?x\\s?|ext\\s?|extension\\s?)\\d{1,5}){0,1}$";  
-			//pattern = Pattern.compile("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$");
-			// pattern = Pattern.compile(expression);
-			pattern = Pattern.compile("/^(\\+91-|\\+91|0|\\+)?\\d{10}$/");
-		     matcher = pattern.matcher(testerDetails.getPhoneNumber());
-		      
-    		 
-    	
-    			if(!matcher.matches()){
-    					
-    				errors.rejectValue("phoneNumber", "Pattern.appVendorDetails.phoneNumber");
-    			
-    			}
 		
 		if (!testerDetails.getPassword().equals(testerDetails.getConfirmPassword())) {
 			errors.rejectValue("confirmPassword", "Diff.appVendor.confirmPassword");
-		}*/
+		}
 		
 				
 	}

@@ -104,8 +104,8 @@
              <td><label>Confirm Password       : </label></td>
              </tr>
              <tr>
-             <td><form:input id="Edu" path="password" cssStyle="width: 95%" disabled="true"/></td>
-             <td><form:input id="Occupation" path="confirmPassword" cssStyle="width: 95%" disabled="true"/></td>
+             <td><form:input id="Edu" path="password" type="password" cssStyle="width: 95%" disabled="true"/></td>
+             <td><form:input id="Occupation" path="confirmPassword" type="password" cssStyle="width: 95%" disabled="true"/></td>
              </tr>
              
              <tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr>
