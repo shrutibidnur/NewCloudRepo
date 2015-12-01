@@ -26,6 +26,8 @@
     <body>    
         <form:form onsubmit="return checkForm(this);" method="post" modelAttribute="appVendorDetails" action="registerAppProvider.do" class="register">
             <h1>Mobile App Provider Registration Form</h1>
+            
+            <p >* Obligatory fields</p>
             <fieldset class="row1">
                 <legend>Account Details
                 </legend>
@@ -66,14 +68,7 @@
                    </div>
                 
             </fieldset>
-            
-            
-            
-            
-            
-            
-            
-            <fieldset class="row2">
+         <fieldset class="row2">
                 <legend>Company Details
                 </legend>
                 <p>
@@ -85,19 +80,19 @@
                 </p>
                  
                 <p>
-                    <label>Phone *
+                    <label>Phone 
                     </label>
                     <form:input path="phoneNumber" placeholder="Phone Number"/>
-                    <form:errors path="phoneNumber" cssStyle="color: #ff0000;"/>
+                   <%--  <form:errors path="phoneNumber" cssStyle="color: #ff0000;"/> --%>
                 </p>
                 <p>
-                    <label class="optional">Registered Address
+                    <label >Registered Address
                     </label>
                     <form:input path="address" placeholder="Address"/>
-                    <form:errors path="address" cssStyle="color: #ff0000;"/>
+                    <%-- <form:errors path="address" cssStyle="color: #ff0000;"/> --%>
                 </p>
                 <p>
-                    <label class="optional">Company Website
+                    <label >Company Website*
                     </label>
                     <form:input path="companyWebsite" placeholder="http://"/>
                     <form:errors path="companyWebsite" cssStyle="color: #ff0000;"/>

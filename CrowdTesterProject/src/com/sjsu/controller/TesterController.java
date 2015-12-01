@@ -159,7 +159,13 @@ public class TesterController {
 			HttpServletResponse response, @ModelAttribute("testerDetails") TesterDetails testerDetails, Model model){
 		System.out.println("Edit And Save TESTER Details :: METHODNAME :: editTesterProfile");
 		HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
 		TesterDetails oldTesterDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		/*if (testerDetails.getFirstName() == null || testerDetails.getFirstName() == "") {
+			modelAndView.addObject("ERROR", "Please provide First name");
+			modelAndView.setViewName("/TesterProfileForm");
+			return modelAndView;
+		}*/
 		oldTesterDetails.setFirstName(testerDetails.getFirstName());
 		oldTesterDetails.setLastName(testerDetails.getLastName());
 		oldTesterDetails.setAge(testerDetails.getAge());

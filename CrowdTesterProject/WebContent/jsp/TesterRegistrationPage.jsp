@@ -73,19 +73,19 @@
                     <form:errors path="firstName" cssStyle="color: #ff0000;"/>
                 </p>
                   <p>
-                    <label>Last Name *
+                    <label>Last Name 
                     </label>
                     <form:input path="lastName" placeholder="Last Name"/>
                     
                 </p>
                 <p>
-                    <label>Phone *
+                    <label>Phone 
                     </label>
                     <form:input path="phoneNumber" placeholder="Phone Number"/>
                     
                 </p>
                 <p>
-                    <label class="optional">Address
+                    <label >Address
                     </label>
                     <form:input path="address" placeholder="Address"/>
                     
@@ -103,7 +103,7 @@
                 </legend>
                 
                  <p>
-                    <label>Gender *</label>
+                    <label>Gender </label>
                     <form:radiobutton class="gender" path="gender" value="M" />
                     
                      <label class="gender">Male</label>    							
@@ -112,7 +112,7 @@
                      <label class="gender">Female</label>
                 </p> 
                 <p>
-                    <label>Age *</label> 
+                    <label>Age </label> 
                     <form:input path="age" placeholder="Age"/>
                     
                 </p>
@@ -142,14 +142,14 @@
                 <legend>Terms and Mailing
                 </legend>
                 <p class="agreement">
-                    <input type="checkbox" value=""/>
+                    <input name="terms" type="checkbox" value=""/>
                     <label>*  I accept the <a href="SLA_Tester.txt">Terms and Conditions</a></label>
                 </p>
             </fieldset>
              <p>
             <div align="center"><span class="error" style="color:red" >${ERROR}</span></div>
             </p>
-            <div><button name="terms" class="button">Register &raquo;</button></div>
+            <div><button   class="button">Register &raquo;</button></div>
         </form:form>
     </body>
 </html>
