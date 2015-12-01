@@ -97,6 +97,7 @@ public class registrationController {
 		try{
 		registrationService.saveTesterDetails(testerDetails);
 		System.out.println("REGISTER TESTER::::success");
+		modelAndView.addObject("ERROR","");
 		modelAndView.setViewName("/SuccessPage");
 		return modelAndView;
 		
@@ -143,6 +144,7 @@ public class registrationController {
 		try {
 		 registrationService.saveAppVendorDetails(appVendorDetails);
 		System.out.println("REGISTER APP VENDOR::::SUCCESS" );
+		modelAndView.addObject("ERROR","");
 		modelAndView.setViewName("/SuccessPage");
 		}
 		catch(HibernateException e){

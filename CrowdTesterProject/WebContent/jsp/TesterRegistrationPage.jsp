@@ -7,9 +7,22 @@
         <title>Tester Registration Form</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
+         <script type="text/javascript">
+
+  function checkForm(form)
+  {
+    if(!form.terms.checked) {
+      alert("Please indicate that you accept the Terms and Conditions");
+      form.terms.focus();
+      return false;
+    }
+    return true;
+  }
+
+</script>
     </head>
     <body>    
-        <form:form method="post" modelAttribute="testerDetails" action="registerTester.do" class="register">
+        <form:form onsubmit="return checkForm(this);" method="post" modelAttribute="testerDetails" action="registerTester.do" class="register">
             <h1>Tester Registration Form</h1>
             <fieldset class="row1">
                 <legend>Account Details
@@ -34,14 +47,14 @@
                 <div>
                     <label>Password*
                     </label>
-                    <form:input path="password" placeholder="Password"/>
+                    <form:input type="password" path="password" placeholder="Password"/>
                     <form:errors path="password" cssStyle="color: #ff0000;"/>
                  </div>
                  <td><label>  </label></td>
                  <div>
                     <label>Confirm Password*
                     </label>
-                    <form:input path="confirmPassword" placeholder="Password"/>
+                    <form:input type="password" path="confirmPassword" placeholder="Password"/>
                     <form:errors path="confirmPassword" cssStyle="color: #ff0000;"/>
                     
                     </label>
@@ -135,7 +148,7 @@
              <p>
             <div align="center"><span class="error" style="color:red" >${ERROR}</span></div>
             </p>
-            <div><button class="button">Register &raquo;</button></div>
+            <div><button name="terms" class="button">Register &raquo;</button></div>
         </form:form>
     </body>
 </html>

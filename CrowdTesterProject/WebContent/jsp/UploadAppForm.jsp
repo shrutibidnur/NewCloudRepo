@@ -8,9 +8,22 @@
         <title>Create new Task Form</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
+        <script type="text/javascript">
+
+  function checkForm(form)
+  {
+    if(!form.terms.checked) {
+      alert("Please indicate that you accept the Terms and Conditions");
+      form.terms.focus();
+      return false;
+    }
+    return true;
+  }
+
+</script>
     </head>
     <body>    
-     <form:form method="post" modelAttribute="uploadAppBO" action="../appVendor/showAppSaveform.do" class="register">
+     <form:form onsubmit="return checkForm(this);" method="post" modelAttribute="uploadAppBO" action="../appVendor/showAppSaveform.do" class="register">
  
             <h1>Upload an Application</h1>
             <fieldset class="row1">
@@ -209,7 +222,7 @@
                 <legend>Terms and Mailing
                 </legend>
                 <p class="agreement">
-                    <input type="checkbox" value=""/>
+                    <input name="terms" type="checkbox" value=""/>
                     <label>*  I accept the <a href="SLA_Tester.txt">Terms and Conditions</a></label>
                 </p>
             </fieldset>
