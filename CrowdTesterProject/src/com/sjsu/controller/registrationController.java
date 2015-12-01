@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -76,29 +77,54 @@ public class registrationController {
 	}
 	
 	@RequestMapping("/registerTester")
-	public String registerTester(HttpServletRequest request,
+	public ModelAndView registerTester(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("testerDetails") @Valid TesterDetails testerDetails,BindingResult result, Model model){
-ModelAndView modelAndView = new ModelAndView();
+		
+		ModelAndView modelAndView = new ModelAndView();
 		
 		System.out.println("hi bindu1");
 		testerValidator.validate(testerDetails, result);
        //System.out.println("bin"+result.getFieldValue("email"));
         if (result.hasErrors()){
         	
-        	
-        	return "TesterRegistrationPage";
+        	modelAndView.setViewName("/TesterRegistrationPage");
+        	return modelAndView;
         }
         else {
 		
 		System.out.println(testerDetails );
-		String result1 = registrationService.saveTesterDetails(testerDetails);
-		System.out.println("REGISTER TESTER::::" +result1);
-		return "SuccessPage";
+		//String result1 = registrationService.saveTesterDetails(testerDetails);
+		try{
+		registrationService.saveTesterDetails(testerDetails);
+		System.out.println("REGISTER TESTER::::success");
+		modelAndView.setViewName("/SuccessPage");
+		return modelAndView;
+		
+		}
+		catch(HibernateException e){
+			System.out.println("REGISTER TESTER::::FAIL");
+			modelAndView.setViewName("/TesterRegistrationPage");
+			String errorMessage = e.getCause().toString();
+			
+			if(errorMessage.contains("PRIMARY"))
+			{
+				modelAndView.addObject("ERROR", "Oops! Username is taken up");
+			}
+			/*else if {
+				modelAndView.addObject("ERROR", "Oops! E is taken up");
+			}*/
+			else{
+			modelAndView.addObject("ERROR", e.getCause());
+			
+		}
+			return modelAndView;}
+		
+		//return "SuccessPage";
 	}
 }
 	
 	@RequestMapping("/registerAppProvider")
-	public String registerTester(HttpServletRequest request,
+	public ModelAndView registerTester(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("appVendorDetails") @Valid AppVendorDetails appVendorDetails,BindingResult result,
 			Model model){
 		ModelAndView modelAndView = new ModelAndView();
@@ -108,15 +134,38 @@ ModelAndView modelAndView = new ModelAndView();
        System.out.println("bin"+result.getFieldValue("contactEmail"));
         if (result.hasErrors()){
         	
-        	
-        	return "AppProviderRegistrationPage";
+        	modelAndView.setViewName("/AppProviderRegistrationPage");
+        	return modelAndView;
+        	//return "AppProviderRegistrationPage";
         }
         else {
 		System.out.println(appVendorDetails );
-		String result1 = registrationService.saveAppVendorDetails(appVendorDetails);
-		System.out.println("REGISTER TESTER::::" +result1);
+		try {
+		 registrationService.saveAppVendorDetails(appVendorDetails);
+		System.out.println("REGISTER APP VENDOR::::SUCCESS" );
+		modelAndView.setViewName("/SuccessPage");
+		}
+		catch(HibernateException e){
+			System.out.println("REGISTER APP VENDOR::::FAIL");
+			modelAndView.setViewName("/AppProviderRegistrationPage");
+			String errorMessage = e.getCause().toString();
+			
+			if(errorMessage.contains("PRIMARY"))
+			{
+				modelAndView.addObject("ERROR", "Oops! Username is taken up");
+			}
+			/*else if {
+				modelAndView.addObject("ERROR", "Oops! E is taken up");
+			}*/
+			else{
+			modelAndView.addObject("ERROR", e.getCause());
+			
+		}
+			return modelAndView;
+		}
+		//System.out.println("REGISTER APP VENDOR::::" +result1);
 		
-		return "SuccessPage";
+		return modelAndView;
 	}
 	}
 

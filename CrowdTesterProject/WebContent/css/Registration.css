@@ -94,7 +94,7 @@ form.register fieldset.row3
 form.register fieldset.row4
 {
     border-top:1px solid #80c3ff;
-    border-right:1px solid #80c3ff;
+    /* border-right:1px solid #80c3ff; */
     padding:5px;
     float:left;
     clear:both;

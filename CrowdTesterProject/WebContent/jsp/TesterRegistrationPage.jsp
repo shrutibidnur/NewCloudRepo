@@ -132,6 +132,9 @@
                     <label>*  I accept the <a href="SLA_Tester.txt">Terms and Conditions</a></label>
                 </p>
             </fieldset>
+             <p>
+            <div align="center"><span class="error" style="color:red" >${ERROR}</span></div>
+            </p>
             <div><button class="button">Register &raquo;</button></div>
         </form:form>
     </body>

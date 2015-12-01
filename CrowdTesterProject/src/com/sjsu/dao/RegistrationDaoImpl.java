@@ -1,5 +1,6 @@
 package com.sjsu.dao;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +25,32 @@ public class RegistrationDaoImpl implements IRegistrationDao {
 	}
 	
 	@Override
-	public String saveTesterDetails(TesterDetails testerDetails) {
+	public void saveTesterDetails(TesterDetails testerDetails) throws HibernateException{
 		System.out.println("SAVE TESTER DETAILS ::: In DAO class..");
 		Session session = getSessionFactory().getCurrentSession();
-		String result = "SUCCESS";
+	//	String result = "SUCCESS";
 		try {
 		session.beginTransaction();
 		
 		session.save(testerDetails);
 		session.getTransaction().commit();
-		} catch(Exception e) {
+		} catch(HibernateException e) {
 			System.out.println(e);
 			session.getTransaction().rollback();
-			result = "";
-			return result;
+			throw e;
+			
+		//	result = "FAIL";
+		//	return result;
+			
 		}
-		return result;
+	//	return result;
 	}
 
 	@Override
-	public String saveAppVendorDetails(AppVendorDetails appVendorDetails) {
+	public void saveAppVendorDetails(AppVendorDetails appVendorDetails) throws HibernateException{
 		System.out.println("SAVE APP PROVIDER DETAILS ::: In DAO class..");
 		Session session = getSessionFactory().getCurrentSession();
-		String result = "SUCCESS";
+		//String result = "SUCCESS";
 		try {
 		session.beginTransaction();
 		
@@ -55,10 +59,11 @@ public class RegistrationDaoImpl implements IRegistrationDao {
 		} catch(Exception e) {
 			System.out.println(e);
 			session.getTransaction().rollback();
-			result = "FAIL";
-			return result;
+			//result = "FAIL";
+			//return result;
+			throw e;
 		}
-		return result;
+		//return result;
 	}
 
 }

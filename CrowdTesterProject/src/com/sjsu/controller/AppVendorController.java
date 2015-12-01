@@ -125,7 +125,7 @@ public class AppVendorController {
 		
 		System.out.println("HI shib");
 		uploadAppBO.setCost(0);
-		String result = appVendorService.saveAppDetails(uploadAppBO);
+		//String result = appVendorService.saveAppDetails(uploadAppBO);
 		System.out.println("HIiiiii");
 		AppPlatformDetailsBO appPlatformDetailsBO = new AppPlatformDetailsBO();
 		model.addAttribute("appPlatformDetailsBO", appPlatformDetailsBO);
@@ -135,8 +135,10 @@ public class AppVendorController {
 		testPlatformList.add("Windows");
 		testPlatformList.add("Blackberry");
 		appPlatformDetailsBO.setTestPlatformList(testPlatformList);
-		appPlatformDetailsBO.setApp_Details_Application_ID(uploadAppBO);
+		
+		/*appPlatformDetailsBO.setApp_Details_Application_ID(uploadAppBO);
 		System.out.println("SAVED APPLICATION DETAILS ::: " + uploadAppBO);
+		*/
 		HttpSession session = request.getSession();
 		session.setAttribute("sessionAppDetails", uploadAppBO);
 		return new ModelAndView("PaymentSchemaOutline", "appPlatformDetailsBO", appPlatformDetailsBO);
@@ -149,7 +151,8 @@ public class AppVendorController {
 		
 		HttpSession session = request.getSession();
 		ApplicationDetails appDetails = (ApplicationDetails) session.getAttribute("sessionAppDetails");
-		appPlatformDetailsBO.setApp_Details_Application_ID(appDetails);
+		
+		//appPlatformDetailsBO.setApp_Details_Application_ID(appDetails);
 		String testingPlatform = "";
 		System.out.println("ENTERED METHOD ::: uploadApplication ::: AppPlatformDetailsBO ::: " +appPlatformDetailsBO);
 		Iterator<String> iterator = appPlatformDetailsBO.getTestPlatformList().iterator();
@@ -164,11 +167,16 @@ public class AppVendorController {
 		appPlatformDetailsBO.setNo_of_testing_Platform(appPlatformDetailsBO.getTestPlatformList().size());
 		System.out.println("AFTER CHANGES ::: " +appPlatformDetailsBO);
 		
-		return "Success";
+		
+		String result = appVendorService.saveAppDetails(appDetails,appPlatformDetailsBO);
+		
+		System.out.println("saving app and platform details, result = "+result);
+		
+		return "SuccessPage";
 	}
 	
 	@RequestMapping("/ajaxCalculateAmount")
-	public @ResponseBody int ajaxCalculateAmount(@RequestParam("noOfTesters") int noOfTesters,@RequestParam("cost") int cost,@RequestParam("platformSelected") int platformSelected){
+	public @ResponseBody int ajaxCalculateAmount(@RequestParam("noOfTesters") int noOfTesters,@RequestParam("cost") int cost,@RequestParam("platformSelected") int platformSelected, HttpServletRequest request){
 		System.out.println("Entered Ajax Method ::: METHODNAME ::: ajaxShowTestDetails");
 		cost = 0;
 		if(noOfTesters <= 5) {
@@ -184,10 +192,15 @@ public class AppVendorController {
 		}
 		
 		cost = cost + platformSelected * 1000;
-		
+		HttpSession session = request.getSession();
+		ApplicationDetails appDetails = (ApplicationDetails) session.getAttribute("sessionAppDetails");
+		appDetails.setCost(cost);
+		System.out.println("saving cost into db");
 		return cost;
 		
 		
 	}
+	
+	
 	
 }

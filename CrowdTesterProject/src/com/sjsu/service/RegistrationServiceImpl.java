@@ -1,5 +1,6 @@
 package com.sjsu.service;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,15 +23,17 @@ public class RegistrationServiceImpl implements IRegistrationService {
 	}
 
 	@Override
-	public String saveTesterDetails(TesterDetails testerDetails) {
-		String result = registrationDao.saveTesterDetails(testerDetails);
-		return result;
+	public void saveTesterDetails(TesterDetails testerDetails) throws HibernateException{
+		//String result = registrationDao.saveTesterDetails(testerDetails);
+		
+		registrationDao.saveTesterDetails(testerDetails);
+		//return result;
 	}
 
 	@Override
-	public String saveAppVendorDetails(AppVendorDetails appVendorDetails) {
-		String result = registrationDao.saveAppVendorDetails(appVendorDetails);
-		return result;
+	public void saveAppVendorDetails(AppVendorDetails appVendorDetails)throws HibernateException {
+		 registrationDao.saveAppVendorDetails(appVendorDetails);
+		//return result;
 	}
 
 }
