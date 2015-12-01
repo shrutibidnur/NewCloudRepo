@@ -27,7 +27,7 @@
     <div class="tabs">
     <ul class="tab-links">
         <li class="active"><a href="#tab1">My Profile</a></li>
-        <li><a href="#tab2">Personal</a></li>
+        <!-- <li><a href="#tab2">Personal</a></li> -->
         </ul>
      <form:form id="editAppVendorFormID" method="post" modelAttribute="appVendorDetails" action="editAppVendorProfile.do">
  
@@ -40,14 +40,14 @@
             <div>
              
              <br/><br/><br/>
-             <table width=100%>
+            <%--  <table width=100%>
              <tr>
              <td><label>Your email        : </label></td>
              <td><label>LinkedIn url        : </label></td>
              </tr>
              <tr>
              <td><form:input path="contactEmail" /></td>
-             <td><form:input path="contactEmail" /></td>
+             <td><form:input path="ranking" /></td>
              </tr>
              <tr><td>&nbsp;</td></tr>
              <tr><td>&nbsp;</td></tr>
@@ -76,14 +76,8 @@
              <tr>
              <td colspan="2" align="center"><form:input path="password" /></td>
              </tr> -->
-             </table>
-       
-            </div>
-        </div>
- 
-        <div id="tab2" class="tab">
-        
-         <table width=100% align="center">
+             </table> --%>
+       	 <table width=100% align="center">
              <tr>
              <td><label>Company name        : </label></td>
              <td ><label>Company email         : </label></td>
@@ -110,17 +104,25 @@
              <td><label>Confirm Password       : </label></td>
              </tr>
              <tr>
-             <td><form:input id="Edu" path="password" cssStyle="width: 95%" disabled="true"/></td>
-             <td><form:input id="Occupation" path="confirmPassword" cssStyle="width: 95%" disabled="true"/></td>
+             <td><form:input id="Edu" path="password" type="password" cssStyle="width: 95%" disabled="true"/></td>
+             <td><form:input id="Occupation" path="confirmPassword" type="password" cssStyle="width: 95%" disabled="true"/></td>
              </tr>
              
              <tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr>
              
          </table>
+         <div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div>
         <button type="button" id="editAppVendorProfileData" value="EDIT">EDIT</button>
        <!--  <button type="button" id="saveProfileData" value="SAVE">SAVE</button> -->
         <form:button id="saveAppVendorProfileData" value="SAVE" disabled="true">SAVE</form:button>
         
+            </div>
+        </div>
+ 
+        <div id="tab2" class="tab">
+        
+        
+         
         </div>
  
         <div id="tab3" class="tab">

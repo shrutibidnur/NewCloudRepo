@@ -57,6 +57,21 @@ $(document).ready( function() {
 	    	
 	    });
 	    
+	    $('#saveAppVendorProfileData').click(function () {
+	    	if ($("#error").val()!=null || $("#error").val()!=""){
+	    		
+	    		$("#Name").prop("disabled",false)
+		    	$("#email").prop("disabled",false)
+		    	$("#Address").prop("disabled",false)
+		    	$("#Age").prop("disabled",false)
+		    	$("#Edu").prop("disabled",false)
+		    	$("#Occupation").prop("disabled",false)
+		    	$("#saveAppVendorProfileData").prop("disabled",false)
+	    	}
+	    	
+	    	
+	    });
+	    
 	    
 //	    $('a.editFname').click(function () {
 //	    	$("#Fname").prop("disabled",false)

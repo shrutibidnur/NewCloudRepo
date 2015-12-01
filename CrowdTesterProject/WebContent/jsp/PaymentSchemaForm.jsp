@@ -52,7 +52,7 @@
 		<label class="description" for="element_2">Total Cost </label>
 		<span class="symbol">$</span>
 		<span>
-			<form:input path="app_Details_Application_ID.cost" id="costId"/>
+			<form:input path="cost" id="costId"/>
 			<!-- <input id="element_2_1" name="element_2_1" class="element text currency" size="10" value="" type="text" /> . -->		
 			<label for="element_2_1">Dollars</label>
 		</span>
@@ -62,11 +62,13 @@
 		</span> -->
 		 
 		</li>
+		<p><div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div></p>
 			
 					<li class="buttons">
 					<button type="button" id="calculateAmount" value="calculateAmount">Calculate Amount</button>
 					<!-- <input id="calculateAmount" class="button_text" type="submit" name="submit" value="Calculate Payment" /> -->
-        <form:button id="saveProfileData" value="SAVE" disabled="true">PROCEED PAYMENT</form:button>
+        <form:button id="saveProfileData" value="SAVE" >PROCEED PAYMENT</form:button>
+        
 			    
 				
 		</li>

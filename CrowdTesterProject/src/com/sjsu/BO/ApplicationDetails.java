@@ -1,11 +1,13 @@
 package com.sjsu.BO;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,40 +27,49 @@ public class ApplicationDetails {
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 	
-	@Column(name = "TEST_TYPE", nullable = false)
+	@Column(name = "TEST_TYPE", nullable = true)
 	private String testType;
 	
-	@Column(name = "PRODUCT_OS", nullable = false)
+	/*@Column(name = "PRODUCT_OS", nullable = false)
 	private String productOS;
-	
-	@Column(name = "TESTING", nullable = true)
-	private String testing;
-	
+	*/
+//	@Column(name = "TESTING", nullable = true)
+//	private String testing;
+//	
 	@Column(name = "TEST_DEADLINE", nullable = false)
 	private String testDeadLine;
 	
 	@Column(name = "DOWNLOAD_LINK", nullable = false)
 	private String downloadLink;
 	
-	@Column(name = "APP_SIZE", nullable = false)
+	@Column(name = "APP_SIZE", nullable = true)
 	private String appSize;
 	
-	@Column(name = "APP_DOCUMENT", nullable = false)
+	@Column(name = "APP_DOCUMENT", nullable = true)
 	private String appDocument;
 	
 //	@Column(name = "APP_PROVIDER", nullable = false)
 //	private String appProvider;
 	
-	//@Column(name = "APP_VENDOR_DETAILS_USERNAME", nullable = false)
-	@Column(name = "APP_VENDOR_DETAILS_USERNAME")
-	private String appVendorUsername;
+	public AppVendorDetails getAppVendorUsername() {
+		return appVendorUsername;
+	}
+
+	public void setAppVendorUsername(AppVendorDetails appVendorUsername) {
+		this.appVendorUsername = appVendorUsername;
+	}
+
+	//@Column(name = "APP_VENDOR_DETAILS_USERNAME")
+	@ManyToOne(cascade={CascadeType.PERSIST})
+	@JoinColumn(name= "APP_VENDOR_DETAILS_USERNAME")
+	private AppVendorDetails appVendorUsername;
 	
-	@Column(name = "APP_LANGUAGE", nullable = false)
+	@Column(name = "APP_LANGUAGE", nullable = true)
 	private String appLanguage;
 	
-	@Column(name = "REPORTING_LANGUAGE", nullable = false)
-	private String reportingLanguage;
-	
+//	@Column(name = "REPORTING_LANGUAGE", nullable = false)
+//	private String reportingLanguage;
+//	
 	@Column(name = "COST", nullable = false)
 	private int cost;
 
@@ -94,7 +105,7 @@ public class ApplicationDetails {
 		this.testType = testType;
 	}
 
-	public String getProductOS() {
+	/*public String getProductOS() {
 		return productOS;
 	}
 
@@ -109,7 +120,7 @@ public class ApplicationDetails {
 	public void setTesting(String testing) {
 		this.testing = testing;
 	}
-
+*/
 	public String getTestDeadLine() {
 		return testDeadLine;
 	}
@@ -150,13 +161,6 @@ public class ApplicationDetails {
 //		this.appProvider = appProvider;
 //	}
 
-	public String getAppVendorUsername() {
-		return appVendorUsername;
-	}
-
-	public void setAppVendorUsername(String appVendorUsername) {
-		this.appVendorUsername = appVendorUsername;
-	}
 
 	public String getAppLanguage() {
 		return appLanguage;
@@ -166,14 +170,14 @@ public class ApplicationDetails {
 		this.appLanguage = appLanguage;
 	}
 
-	public String getReportingLanguage() {
+	/*public String getReportingLanguage() {
 		return reportingLanguage;
 	}
 
 	public void setReportingLanguage(String reportingLanguage) {
 		this.reportingLanguage = reportingLanguage;
 	}
-
+*/
 	public int getCost() {
 		return cost;
 	}
@@ -186,13 +190,14 @@ public class ApplicationDetails {
 	public String toString() {
 		return "ApplicationDetails [applicationID=" + applicationID
 				+ ", appName=" + appName + ", description=" + description
-				+ ", testType=" + testType + ", productOS=" + productOS
-				+ ", testing=" + testing + ", testDeadLine=" + testDeadLine
+//				+ ", testType=" + testType + ", productOS=" + productOS
+	//			+ ", testing=" + testing + ", testDeadLine=" + testDeadLine
 				+ ", downloadLink=" + downloadLink + ", appSize=" + appSize
 				+ ", appDocument=" + appDocument
 				+ ", appVendorUsername=" + appVendorUsername
-				+ ", appLanguage=" + appLanguage + ", reportingLanguage="
-				+ reportingLanguage + ", cost=" + cost + "]";
+				+ ", appLanguage=" + appLanguage 
+		//		+ reportingLanguage
+				+ ", cost=" + cost + "]";
 	}
 	
 	

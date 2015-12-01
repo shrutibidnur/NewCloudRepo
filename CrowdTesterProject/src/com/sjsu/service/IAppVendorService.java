@@ -1,6 +1,7 @@
 package com.sjsu.service;
 
 import com.sjsu.BO.AppVendorDetails;
+import com.sjsu.BO.AppPlatformDetailsBO;
 import com.sjsu.BO.ApplicationDetails;
 
 public interface IAppVendorService {
@@ -9,5 +10,5 @@ public interface IAppVendorService {
 
 	AppVendorDetails setAppProviderDetails(String userName);
 
-	String saveAppDetails(ApplicationDetails uploadAppBO);
+	String saveAppDetails(ApplicationDetails uploadAppBO, AppPlatformDetailsBO appPlatformDetailsBO);
 }

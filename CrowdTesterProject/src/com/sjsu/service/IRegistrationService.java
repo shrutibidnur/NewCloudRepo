@@ -1,12 +1,15 @@
 package com.sjsu.service;
 
+import org.hibernate.HibernateException;
+
 import com.sjsu.BO.AppVendorDetails;
 import com.sjsu.BO.TesterDetails;
 
 public interface IRegistrationService {
 	
-	String saveTesterDetails(TesterDetails testerDetails);
+	void saveTesterDetails(TesterDetails testerDetails)throws HibernateException;
 
-	String saveAppVendorDetails(AppVendorDetails appVendorDetails);
+	void saveAppVendorDetails(AppVendorDetails appVendorDetails)throws HibernateException;
 
 }
+

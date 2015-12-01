@@ -196,7 +196,7 @@ public class TesterController {
 	        formDetailsJson.put("appName" , p.getAppName());
 	        formDetailsJson.put("description", p.getDescription());
 	        formDetailsJson.put("testType" , p.getTestType());
-	        formDetailsJson.put("productOS", p.getProductOS());
+	    //    formDetailsJson.put("productOS", p.getProductOS());
 	        formDetailsJson.put("testDeadline" , p.getTestDeadLine());
 	        jsonArray.add(formDetailsJson);
 	    }

@@ -115,7 +115,7 @@ public class LoginController {
 			HttpServletResponse response, @ModelAttribute("testerDetails") TesterDetails testerDetails, Model model){
 		System.out.println("::::::verifyEmail:::::");
 		System.out.println(testerDetails.getEmail());
-		return "success";
+		return "SuccessPage";
 	}
 	
 	

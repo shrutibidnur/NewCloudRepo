@@ -20,6 +20,8 @@ public class AppVendorValidator implements Validator {
 
 	
 	
+	private static final String NULL = null;
+
 	@Override
 	public boolean supports(Class<?> arg0) {
 		// TODO Auto-generated method stub
@@ -45,23 +47,9 @@ public class AppVendorValidator implements Validator {
     		
     		System.out.println("hi bin");
     		
-    	  //  String errorMessage = properties.getProperty("contactEmail");
-    		
-    	
-    		/*
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "NotEmpty");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "NotEmpty.appVendorDetails.phoneNumber");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.appVendorDetails.address");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyWebsite", "NotEmpty.appVendorDetails.companyWebsite");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactEmail", "NotEmpty");
-    		NotEmpty.appVendorDetails.contactEmail
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty.appVendorDetails.userName");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.appVendor.password");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","NotEmpty.appVendorDetails.confirmPassword");
-    		*/
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "companyName");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "phoneNumber");
-    		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address");
+    		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "phoneNumber");
+    		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address");
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyWebsite", "companyWebsite");
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactEmail", "contactEmail");
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName");
@@ -69,53 +57,35 @@ public class AppVendorValidator implements Validator {
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","confirmPassword");
     		
     		
-    		/*final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." +
+    		final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." +
     				"[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" +
     				"(\\.[A-Za-z]{2,})$";
 
     		Pattern pattern;
     		Matcher matcher;
     		 pattern = Pattern.compile(EMAIL_PATTERN);
-    		 
+    		 if(appVendorDetails.getContactEmail() == null || appVendorDetails.getContactEmail().length() != 0) 
+    		 {
     		 matcher = pattern.matcher(appVendorDetails.getContactEmail());
     			if(!matcher.matches()){
     					
     				errors.rejectValue("contactEmail", "Pattern.appVendorDetails.email");
     			}
+    		 }
     		
-<<<<<<< HEAD
     			//String expression = "^(?=.{7,32}$)(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*((\\s?x\\s?|ext\\s?|extension\\s?)\\d{1,5}){0,1}$";  
-    			   
-    			 pattern = Pattern.compile("^[0-9]{10}$");
-=======
-    			//String expression = "^(?=.{7,32}$)(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*((\\s?x\\s?|ext\\s?|extension\\s?)\\d{1,5}){0,1}$";
-    			//String expression = "^[2-9]{2}\d{8}";
+    			
 
-    			pattern = Pattern.compile("/^(\\+91-|\\+91|0|\\+)?\\d{10}$/");
-    			      
-    			// pattern = Pattern.compile(expression);
-
->>>>>>> branch 'master' of https://github.com/shrutibidnur/CloudProjectRepo
-    		     matcher = pattern.matcher(appVendorDetails.getPhoneNumber());
-    		      
+    			
+    			 if(appVendorDetails.getPassword()!= NULL)
+        		 {
         		 
-<<<<<<< HEAD
-        		// = pattern.matcher(appVendorDetails.getContactEmail());
-=======
-        		// matcher = pattern.matcher(appVendorDetails.getContactEmail());
->>>>>>> branch 'master' of https://github.com/shrutibidnur/CloudProjectRepo
-        			if(!matcher.matches()){
-        					
-        				errors.rejectValue("phoneNumber", "Pattern.appVendorDetails.phoneNumber");
-        			
-        			}
-    		
-    		if (!appVendorDetails.getPassword().equals(appVendorDetails.getConfirmPassword())) {
-    			errors.rejectValue("confirmPassword", "Diff.appVendor.confirmPassword");
-    		}*/
-    		
-    				
-	}
+    				 if (!appVendorDetails.getPassword().equals(appVendorDetails.getConfirmPassword())) {
+    					 errors.rejectValue("confirmPassword", "Diff.appVendor.confirmPassword");
+    				 }
+        
+        		 }
 	
 
-}
+		}
+	}

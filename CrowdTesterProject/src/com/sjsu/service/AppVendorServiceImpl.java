@@ -13,7 +13,7 @@ import com.sjsu.BO.TesterDetails;
 import com.sjsu.dao.ILoginDao;
 //import com.sjsu.dao.IAppVendorDao;
 import com.sjsu.dao.IAppVendorDao;
-
+import com.sjsu.BO.AppPlatformDetailsBO;
 
 @Component
 public class AppVendorServiceImpl implements IAppVendorService{
@@ -42,9 +42,11 @@ private IAppVendorDao appVendorDao;
 	}
 
 	@Override
-	public String saveAppDetails(ApplicationDetails uploadAppBO) {
+	public String saveAppDetails(ApplicationDetails uploadAppBO, AppPlatformDetailsBO appPlatformDetailsBO) {
 		String result = appVendorDao.saveAppDetails(uploadAppBO);
-		return result;
+		String result1 = appVendorDao.saveAppPlatformDetails(appPlatformDetailsBO);
+		System.out.println("service class app + platform");
+		return result+result1;
 	}
 
 }
