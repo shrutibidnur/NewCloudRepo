@@ -97,10 +97,29 @@ public class AppVendorController {
 		return "UploadAppOutline";
 	}
 	@RequestMapping("/editAppVendorProfile")
-	public String editAppVendorProfile(HttpServletRequest request,
+	public ModelAndView editAppVendorProfile(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("appVendorDetails") AppVendorDetails appVendorDetails, Model model){
 		System.out.println("Edit And Save App Vendor Details :: METHODNAME :: editAppVendorProfile");
 		HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+		if (appVendorDetails.getCompanyName() == null || appVendorDetails.getCompanyName() == "") {
+			modelAndView.addObject("ERROR", "Please provide Company Name. Save was unsuccessful");
+			modelAndView.setViewName("/AppVendorProfileForm");
+			return modelAndView;
+		}
+		if (appVendorDetails.getContactEmail() == null || appVendorDetails.getContactEmail() == "") {
+			modelAndView.addObject("ERROR", "Please provide Company email. Save was unsuccessful");
+			modelAndView.setViewName("/AppVendorProfileForm");
+			return modelAndView;
+		}
+		System.out.println(appVendorDetails.getPassword() +"::"+appVendorDetails.getConfirmPassword());
+		if (!appVendorDetails.getPassword().equals(appVendorDetails.getConfirmPassword())) {
+		//if (appVendorDetails.getPassword().toString() != appVendorDetails.getConfirmPassword().toString()) {
+			modelAndView.addObject("ERROR", "Passwords not matching. Save was unsuccessful");
+			modelAndView.setViewName("/AppVendorProfileForm");
+			return modelAndView;
+		}
+		
 		AppVendorDetails oldAppVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
 		oldAppVendorDetails.setCompanyName(appVendorDetails.getCompanyName());
 		oldAppVendorDetails.setContactEmail(appVendorDetails.getContactEmail());
@@ -113,9 +132,16 @@ public class AppVendorController {
 		System.out.println(oldAppVendorDetails);
 		String result = appVendorService.editAppVendorProfile(oldAppVendorDetails);
 		if (result.equalsIgnoreCase("SUCCESS")) {
-			return "AppVendorProfileForm";
-		}
-		return "AppVendorAssistForm";
+			modelAndView.addObject("ERROR", "");
+			modelAndView.setViewName("/AppVendorProfileForm");
+			return modelAndView;
+			//return "AppVendorProfileForm";
+		}	
+		modelAndView.addObject("ERROR", "");
+		modelAndView.setViewName("/AppVendorAssistForm");
+		return modelAndView;
+		
+		//return "AppVendorAssistForm";
 
 	}
 	
