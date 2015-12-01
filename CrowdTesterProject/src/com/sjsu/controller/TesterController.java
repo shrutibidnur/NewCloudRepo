@@ -1,6 +1,8 @@
 package com.sjsu.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sjsu.BO.ApplicationDetails;
 import com.sjsu.BO.AssistanceFormBO;
+import com.sjsu.BO.BugDetailsBO;
 import com.sjsu.BO.LoginDetails;
 import com.sjsu.BO.MappingTesterAppBO;
 import com.sjsu.BO.TesterDetails;
@@ -42,6 +47,9 @@ public class TesterController {
 	public void setTesterService(ITesterService testerService) {
 		this.testerService = testerService;
 	}
+	
+	@Autowired
+    private JavaMailSender mailSender;
 	
 	@RequestMapping("/setTesterDetails")
 	public String setTesterDetails(HttpServletRequest request,
@@ -96,6 +104,35 @@ public class TesterController {
 		System.out.println("ASSITANCE FORM: "+assistanceForm);
 		return "TesterAssistanceForm";
 	}
+	
+	@RequestMapping("/sendAssistanceQuery")
+	public String sendAssistanceQuery(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute("assistanceForm") AssistanceFormBO assistanceForm, Model model){
+		System.out.println("METHODNAME ::: sendAssistanceQuery");
+		Date assistanceDate = new Date();
+		SimpleDateFormat assistanceDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+//		HttpSession session = request.getSession();
+//		TesterDetails testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+//		session.setAttribute("sessionTesterDetails", testerDetails);
+		
+		System.out.println("ASSISTANCE: "+assistanceForm);
+		SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(assistanceForm.getToEmail());
+        email.setSubject(assistanceForm.getSeverity()+" : "+assistanceForm.getSubject());
+        email.setText(assistanceForm.getDescription());
+        
+        mailSender.send(email);
+        
+        String DateToStr = assistanceDateFormat.format(assistanceDate);
+        System.out.println(DateToStr);
+        assistanceForm.setStartdate(DateToStr);
+        String result = testerService.sendAssistanceQuery(assistanceForm);
+		//model.addAttribute("assistanceForm", assistanceForm);
+		//System.out.println("ASSITANCE FORM: "+assistanceForm);
+		
+		return "TesterAssistanceForm";
+	}
+	
 	
 	@RequestMapping("/showBillingform")
 	public String showBillingform(HttpServletRequest request,
@@ -198,13 +235,89 @@ public class TesterController {
 		HttpSession session = request.getSession();
 	    String applicationId = appID;
 		MappingTesterAppBO mappingTesterApp = new MappingTesterAppBO();
-		mappingTesterApp.setApplicationId(applicationId);
+		ApplicationDetails testApplicationDetails = new ApplicationDetails();
+		testApplicationDetails.setApplicationID(appID);
+		mappingTesterApp.setApplicationId(testApplicationDetails);
 		TesterDetails testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
 		mappingTesterApp.setTesterUsername(testerDetails.getUserName());
 		mappingTesterApp.setStatus("ASSIGNED");
 		System.out.println(mappingTesterApp);
 		String result = testerService.testThisApplication(mappingTesterApp);
 		
-		return result;
+		return "SUCCESS";
+	}
+	
+	@RequestMapping("/showAssignedApplications")
+	public String showAssignedApplications(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute("testerDetails") TesterDetails testerDetails, Model model){
+		System.out.println("SHOW THE ASSIGNED APPLICATIONS ::: METHODNAME ::: showAssignedApplications");
+		HttpSession session = request.getSession();
+		testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		System.out.println(testerDetails.getUserName());
+		List<MappingTesterAppBO> appDetailsList = new ArrayList<MappingTesterAppBO>();
+		
+		appDetailsList = testerService.getAssignedAppDetails(testerDetails.getUserName());
+		System.out.println("Matched Applications: " +appDetailsList);
+		model.addAttribute("appDetailsList", appDetailsList);
+		return "ViewAssignedApplications";
+	}
+	
+	@RequestMapping("/showReportBugsPage")
+	public String showReportBugsPage(HttpServletRequest request,
+			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam String appID,@RequestParam String appName){
+		System.out.println("SHOW REPORT BUGS ::: METHODNAME ::: showReportBugsPage");
+		
+		System.out.println("Application ID: "+appID+" Application Name: "+appName);
+		ApplicationDetails appDetails = new ApplicationDetails();
+		appDetails.setApplicationID(appID);
+		appDetails.setAppName(appName);
+		bugDetails.setAppDetails(appDetails);
+		//model.addAttribute("appDetailsList", appDetailsList);
+		return "ReportBugsPage";
+	}
+	
+	@RequestMapping("/sendBugDetails")
+	public String sendBugDetails(HttpServletRequest request,
+			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model){
+		System.out.println("REPORT BUGS ::: METHODNAME ::: sendBugDetails");
+		HttpSession session = request.getSession();
+		TesterDetails testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		bugDetails.setTesterDetails(testerDetails);
+		
+		Date bugDate = new Date();
+		SimpleDateFormat assistanceDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		
+		String DateToStr = assistanceDateFormat.format(bugDate);
+        System.out.println(DateToStr);
+        bugDetails.setDetectedDate(DateToStr);
+        bugDetails.setBugStatus("SUBMITTED");
+		String result = testerService.sendBugDetails(bugDetails);
+
+		return "ReportBugsPage";
+	}
+	
+	@RequestMapping("/showViewBugsPage")
+	public ModelAndView showViewBugsPage(HttpServletRequest request,
+			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam String appID){
+		System.out.println("SHOW REPORTED BUGS ::: METHODNAME ::: showViewBugsPage");
+		
+//		Set Application Details
+		System.out.println("Application ID: "+appID);
+		ApplicationDetails appDetails = new ApplicationDetails();
+		appDetails.setApplicationID(appID);
+		bugDetails.setAppDetails(appDetails);
+		
+//		Set Tester Details
+		HttpSession session = request.getSession();
+		TesterDetails testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		bugDetails.setTesterDetails(testerDetails);
+		
+//		Fetch the Bug Details
+		List<BugDetailsBO> bugList = new ArrayList<BugDetailsBO>();
+		bugList = testerService.fetchBugList(testerDetails.getUserName(),appID);
+		
+		
+//		Return the result Page
+		return new ModelAndView ("TesterBugDetails","bugList",bugList);
 	}
 }

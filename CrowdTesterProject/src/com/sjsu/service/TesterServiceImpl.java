@@ -1,11 +1,14 @@
 package com.sjsu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sjsu.BO.ApplicationDetails;
+import com.sjsu.BO.AssistanceFormBO;
+import com.sjsu.BO.BugDetailsBO;
 import com.sjsu.BO.MappingTesterAppBO;
 import com.sjsu.BO.TesterDetails;
 import com.sjsu.dao.ILoginDao;
@@ -60,6 +63,31 @@ public class TesterServiceImpl implements ITesterService{
 	public String getAppVendorUsername(String appId) {
 		String appVendorEmail = testerDao.getAppVendorUsername(appId);
 		return appVendorEmail;
+	}
+
+	@Override
+	public String sendAssistanceQuery(AssistanceFormBO assistanceForm) {
+		String result = testerDao.sendAssistanceQuery(assistanceForm);
+		return result;
+	}
+
+	@Override
+	public List<MappingTesterAppBO> getAssignedAppDetails(String userName) {
+		List<MappingTesterAppBO> assignedAppDetailsList = testerDao.getAssignedAppDetails(userName);
+		return assignedAppDetailsList;
+	}
+
+	@Override
+	public String sendBugDetails(BugDetailsBO bugDetails) {
+		String result = testerDao.sendBugDetails(bugDetails);
+		return result;
+	}
+
+	@Override
+	public List<BugDetailsBO> fetchBugList(String userName, String appID) {
+		List<BugDetailsBO> bugList = new ArrayList<BugDetailsBO>();
+		bugList = testerDao.fetchBugList(userName,appID);
+		return bugList;
 	}
 
 }

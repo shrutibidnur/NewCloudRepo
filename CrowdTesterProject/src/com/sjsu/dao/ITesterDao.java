@@ -3,6 +3,8 @@ package com.sjsu.dao;
 import java.util.List;
 
 import com.sjsu.BO.ApplicationDetails;
+import com.sjsu.BO.AssistanceFormBO;
+import com.sjsu.BO.BugDetailsBO;
 import com.sjsu.BO.MappingTesterAppBO;
 import com.sjsu.BO.TesterDetails;
 
@@ -19,5 +21,13 @@ public interface ITesterDao {
 	String testThisApplication(MappingTesterAppBO mappingTesterApp);
 
 	String getAppVendorUsername(String appId);
+
+	String sendAssistanceQuery(AssistanceFormBO assistanceForm);
+
+	List<MappingTesterAppBO> getAssignedAppDetails(String userName);
+
+	String sendBugDetails(BugDetailsBO bugDetails);
+
+	List<BugDetailsBO> fetchBugList(String userName, String appID);
 
 }

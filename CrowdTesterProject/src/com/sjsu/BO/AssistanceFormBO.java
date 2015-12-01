@@ -125,10 +125,15 @@ public class AssistanceFormBO {
 
 	@Override
 	public String toString() {
-		return "Assistance [decription=" + description + ", severity="
-				+ severity + ", subject=" + subject + ", startdate=" + startdate + ","
-						+ "id=" + id + ",testerusername=" + testerusername + ",]";
+		return "AssistanceFormBO [id=" + id + ", toEmail=" + toEmail
+				+ ", description=" + description + ", severity=" + severity
+				+ ", subject=" + subject + ", startdate=" + startdate
+				+ ", testerusername=" + testerusername + "]";
 	}
+
+
+
+	
 
 
 

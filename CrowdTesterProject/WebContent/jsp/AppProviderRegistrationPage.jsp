@@ -7,7 +7,7 @@
     <head>
         <title>Mobile App Provider Registration Form</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/RegFinal.css"/>
     </head>
     <body>    
         <form:form method="post" modelAttribute="appVendorDetails" action="registerAppProvider.do" class="register">

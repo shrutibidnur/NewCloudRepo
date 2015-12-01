@@ -1,6 +1,8 @@
-<%-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Billing Form</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +24,7 @@
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" language="javascript" src="../javascript/tablefilter.js"></script> 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,7 +60,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-
+                        
                         
                         <li><a href="../login/showLogin.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -73,13 +76,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-
-
-
-        <div id="page-wrapper">
+ <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Assistance Form</h1>
+                    <h1 class="page-header">Assigned Application Details</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -87,9 +87,47 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Basic Form Elements
-                        </div>
+                       <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
+                       <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
+            <br/><br/>
+	<table width="100%" class='order-table table'>
+		<thead>
+		<tr>
+			<th>Application Name</th>
+			<th> Discription</th>
+			<th>Product OS</th>
+			<th>Dead Line</th>
+			<th>Download URL</th>
+			<th>App Provider</th>
+			<th>Reporting Language</th>
+			<th>Status</th>
+		</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="applications" items="${appDetailsList}">
+			<tr>
+			<td><c:out value="${applications.applicationId.appName}"></c:out></td>
+			<td><c:out value="${applications.applicationId.description}"></c:out></td>
+			<td><c:out value="${applications.applicationId.productOS}"></c:out></td>
+			<td><c:out value="${applications.applicationId.testDeadLine}"></c:out></td>
+			<td><c:out value="${applications.applicationId.downloadLink}"></c:out></td>
+			<td><c:out value="${applications.applicationId.appVendorUsername}"></c:out></td>
+			<td><c:out value="${applications.applicationId.reportingLanguage}"></c:out></td>
+			<td><c:out value="${applications.status}"></c:out></td>
+			<td><a href="showReportBugsPage.do?appID=${applications.applicationId.applicationID}&appName=${applications.applicationId.appName}">Report Bugs</a></td>
+			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td>
+			</tr>
+			</c:forEach>
+		
+		</tbody>
+
+
+
+	</table>
+
+</form:form>
+                       
+                        
                         
                         <!-- /.panel-body -->
                     </div>
@@ -119,4 +157,8 @@
 </body>
 
 </html>
- --%>
+            
+            
+            
+            
+

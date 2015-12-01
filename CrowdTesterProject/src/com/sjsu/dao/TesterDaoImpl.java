@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sjsu.BO.AppVendorDetails;
 import com.sjsu.BO.ApplicationDetails;
+import com.sjsu.BO.AssistanceFormBO;
+import com.sjsu.BO.BugDetailsBO;
 import com.sjsu.BO.MappingTesterAppBO;
 import com.sjsu.BO.TesterDetails;
 
@@ -81,8 +83,7 @@ public class TesterDaoImpl implements ITesterDao{
 	}
 
 	@Override
-	public List<ApplicationDetails> getMatchedAppDetails(
-			String preferredTestLang) {
+	public List<ApplicationDetails> getMatchedAppDetails(String preferredTestLang) {
 		Session session = getSessionFactory().getCurrentSession();
 		List<ApplicationDetails> applicationDetailsList = new ArrayList<ApplicationDetails>();
 		session.beginTransaction();
@@ -142,6 +143,80 @@ public class TesterDaoImpl implements ITesterDao{
 		String appVendorEmail = appVendorDetails.getContactEmail();
 	   
 		return appVendorEmail;
+	}
+
+	@Override
+	public String sendAssistanceQuery(AssistanceFormBO assistanceForm) {
+		System.out.println("SAVE TESTER QUERY DETAILS ::: METHODNAME ::: sendAssistanceQuery");
+		String result = "SUCCESS";
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.saveOrUpdate(assistanceForm);
+		session.getTransaction().commit();
+		return result;
+	}
+
+	@Override
+	public List<MappingTesterAppBO> getAssignedAppDetails(String userName) {
+		Session session = getSessionFactory().getCurrentSession();
+		List<MappingTesterAppBO> assignedApplicationList = new ArrayList<MappingTesterAppBO>();
+		session.beginTransaction();
+		
+//		Query query = session.createSQLQuery(
+//				"select mapping.APPLICATION_ID from MAPPING_TESTER_APP mapping where mapping.TESTER_USERNAME = :userName")
+//				.setParameter("userName",userName);
+//				List assignedAppList = query.list();
+//				System.out.println(assignedAppList);
+				
+		Criteria criteria = session.createCriteria(MappingTesterAppBO.class);
+//		Disjunction disjunction = Restrictions.disjunction();
+//		Iterator<String> iterator = assignedAppList.iterator();
+//		while (iterator.hasNext()) {
+//			//System.out.println(iterator.next());
+//			disjunction.add(Restrictions.eq("applicationID",iterator.next()));
+//		}
+//		criteria.add(disjunction);
+		criteria.add(Restrictions.eq("testerUsername",userName).ignoreCase());
+		
+		assignedApplicationList = (List<MappingTesterAppBO>) criteria.list();
+        System.out.println(assignedApplicationList);
+		session.getTransaction().commit();
+		
+		return assignedApplicationList;
+	}
+
+	@Override
+	public String sendBugDetails(BugDetailsBO bugDetails) {
+		System.out.println("SAVE BUG DETAILS ::: METHODNAME ::: sendBugDetails");
+		String result = "SUCCESS";
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(bugDetails);
+		session.getTransaction().commit();
+		return result;
+	}
+
+	@Override
+	public List<BugDetailsBO> fetchBugList(String userName, String appID) {
+		System.out.println("FETCH BUG DETAILS ::: METHODNAME ::: fetchBugList");
+		List< BugDetailsBO> bugList = new ArrayList<BugDetailsBO>();
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+//		Query to fetch the bug Details
+		Criteria criteria = session.createCriteria(BugDetailsBO.class);
+		Criterion username = Restrictions.eq("testerDetails.userName",userName).ignoreCase();
+        Criterion applicationId = Restrictions.eq("appDetails.applicationID",appID).ignoreCase();
+        LogicalExpression Exp = Restrictions.and(username,applicationId);
+        criteria.add(Exp);
+        bugList = (List<BugDetailsBO>) criteria.list();
+        
+        System.out.println(bugList);
+		session.getTransaction().commit();
+		
+		return bugList;
+		
+		
 	}
 
 }

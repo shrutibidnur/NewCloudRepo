@@ -23,7 +23,8 @@
     
     <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
     <!-- <link id="theme" rel="stylesheet" type="text/css" href="../css/profileHeaderStyle.css" title="theme" /> -->
-    
+    <link rel="stylesheet" type="text/css" href="../css/view.css" media="all"/>
+<script type="text/javascript" src="../javascript/calendar.js"></script>
 
 </head>
  <body id="main_body" > 
@@ -66,78 +67,58 @@
 	
 	<img id="top" src="../images/top.png" alt=""/>
 	<div id="form_container">
-	 <div id="assist-page-wrapper">
-		<h1><a>Assistance Form</a></h1>
-		<form:form id="AssistanceFormID" method="post" modelAttribute="assistanceForm" action="sendAssistanceQuery.do">
+	
+		<h1><a>Bug Details Form</a></h1>
+		<form:form id="BugFormID" method="post" modelAttribute="bugDetails" action="sendBugDetails.do">
+		
 					<div class="form_description">
-			<h2>Assistance Form</h2>
-			<p>Please describe your query in detail & send</p>
-			<form:hidden path="testerusername" />
+			<h2>Bug Details Form</h2>
+			<p></p>
 		</div>						
 			<ul >
+			<li>
+				<label class="appName" for="element_3">Application Name:  </label>
+				 <form:input path="appDetails.appName" readonly="true"/> 
+				 <form:hidden path="appDetails.applicationID" />
+			</li>
 			
-					<li id="li_1" >
-		<label class="description" for="element_1">To </label>
-		<div>
-			<form:input path="toEmail" readonly="true"/>
-			<!-- <input id="element_1" name="element_1" class="element text medium" type="text" maxlength="255" value=""/>  -->
-		</div> 
-		</li>		<li id="li_2" >
-		<label class="description" for="element_2">Subject * </label>
-		<div>
-			<form:input path="subject" />
-			<!-- <input id="element_2" name="element_2" class="element text large" type="text" maxlength="255" value=""/>  -->
-		</div> 
-		</li>		<li id="li_4" >
-		<label class="description" for="element_4">Severity *</label>
-		<div>
+					<li id="li_3" >
+		<label class="description" for="element_3">Bug Severity * </label>
+		<span>
 		
-		<form:select path ="severity">
-                         <form:option value="Low">LOW</form:option>
-                         <form:option value="Medium">MEDIUM</form:option>
-                         <form:option value="High">HIGH</form:option>
-                         <form:option value="Critical">CRITICAL</form:option>
-                    </form:select>
+		<form:radiobutton path="severity" value="Low"/><label class="choice" for="element_3_1">Low</label>
+		<form:radiobutton path="severity" value="Medium"/><label class="choice" for="element_3_2">Medium</label>
+		<form:radiobutton path="severity" value="High"/><label class="choice" for="element_3_3">High</label>
+		<form:radiobutton path="severity" value="Critical"/><label class="choice" for="element_3_4">Critical</label>
 		
-		<!-- <select class="element select medium" id="element_4" name="element_4"> 
-			<option value="1" selected="selected">Low</option>
-<option value="2" >Medium</option>
-<option value="3" >High</option>
-<option value="4" >Critical</option>
+		
+		<!-- 	<input id="element_3_1" name="element_3" class="element radio" type="radio" value="1" />
+<label class="choice" for="element_3_1">Low</label>
+<input id="element_3_2" name="element_3" class="element radio" type="radio" value="2" />
+<label class="choice" for="element_3_2">Medium</label>
+<input id="element_3_3" name="element_3" class="element radio" type="radio" value="3" />
+<label class="choice" for="element_3_3">High</label>
+<input id="element_3_4" name="element_3" class="element radio" type="radio" value="4" />
+<label class="choice" for="element_3_4">Critical</label> -->
 
-		</select> -->
-		</div> 
-		</li>		<li id="li_3" >
-		<label class="description" for="element_3">Description * </label>
+		</span> 
+		</li>		
+				<li id="li_1" >
+		<label class="description" for="element_1">Bug Description *	 </label>
 		<div>
-		<form:textarea path="description" />
-			<!-- <textarea id="element_3" name="element_3" class="element textarea medium"></textarea>  -->
+			<form:textarea id="element_1" name="element_1" class="element textarea medium" path="bugDetails" />
+			<!-- <textarea id="element_1" name="element_1" class="element textarea medium"></textarea> --> 
 		</div> 
 		</li>
 			
 					<li class="buttons">
-			    <input type="hidden" name="form_id" value="1076669" />
+			    <input type="hidden" name="form_id" value="1077547" />
 			    
-				<input id="saveForm" class="button_text" type="submit" name="submit" value="Send Email" />
+				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
 		</li>
 			</ul>
-		</form:form>	
-		
+		</form:form>
 	</div>
 	<img id="bottom" src="../images/bottom.png" alt=""/>
-	
-</div>	
-	 <!-- jQuery -->
-    <script src="../javascript/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../javascript/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../javascript/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../javascript/sb-admin-2.js"></script>
-	
 	</body>
 </html>

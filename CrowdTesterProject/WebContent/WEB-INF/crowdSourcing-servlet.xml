@@ -14,7 +14,21 @@
 	<mvc:annotation-driven />
     <context:annotation-config />
     <context:component-scan base-package="com.sjsu" />
-<!-- <context:property-placeholder location="com.sjsu.validator.validation.properties" />--> 
+<!-- <context:property-placeholder location="com.sjsu.validator.validation.properties" />-->
+
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com"></property>
+    <property name="port" value="587"></property>
+    <property name="username" value="nagiosximoniter@gmail.com"></property>
+    <property name="password" value="shruti1990"></property>
+    <property name="javaMailProperties">
+        <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>     
+    </property>
+</bean>
 	
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -47,6 +61,8 @@
 			<value>com.sjsu.BO.ApplicationDetails</value>
 			<value>com.sjsu.BO.AppPlatformDetailsBO</value>
 			<value>com.sjsu.BO.MappingTesterAppBO</value>
+			<value>com.sjsu.BO.AssistanceFormBO</value>
+			<value>com.sjsu.BO.BugDetailsBO</value>
 		</list>
 		</property>
  	

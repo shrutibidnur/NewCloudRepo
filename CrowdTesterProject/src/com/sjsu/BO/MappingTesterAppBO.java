@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,8 +23,11 @@ public class MappingTesterAppBO {
 	@Column(name = "TESTER_USERNAME", nullable = false)
 	private String testerUsername;
 	
-	@Column(name = "APPLICATION_ID", nullable = false)
-	private String applicationId;
+//	@Column(name = "APPLICATION_ID", nullable = false)
+	
+	@ManyToOne
+    @JoinColumn(name = "APPLICATION_ID")
+	private ApplicationDetails applicationId;
 	
 	@Column(name = "STATUS", nullable = false)
 	private String status;
@@ -43,11 +48,11 @@ public class MappingTesterAppBO {
 		this.testerUsername = testerUsername;
 	}
 
-	public String getApplicationId() {
+	public ApplicationDetails getApplicationId() {
 		return applicationId;
 	}
 
-	public void setApplicationId(String applicationId) {
+	public void setApplicationId(ApplicationDetails applicationId) {
 		this.applicationId = applicationId;
 	}
 
