@@ -25,7 +25,7 @@
     <body>    
      <form:form onsubmit="return checkForm(this);" method="post" modelAttribute="uploadAppBO" action="../appVendor/showAppSaveform.do" class="register">
  
-            <h1>Upload an Application</h1>
+            
             <fieldset class="row1">
                 <legend>App details
                 </legend>
@@ -50,7 +50,7 @@
                     </label>
                 </p> --%>
             </fieldset>
-            <fieldset class="row2">
+            <fieldset class="row3">
                 <legend>Further Information
                 </legend>
                 <p>
@@ -232,4 +232,5 @@
            </form:form>
           
     </body>
+    
 </html>

@@ -152,4 +152,7 @@
             <div><button   class="button">Register &raquo;</button></div>
         </form:form>
     </body>
+    <footer class="clearFix">
+  
+</footer>
 </html>

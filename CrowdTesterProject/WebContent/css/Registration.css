@@ -1,4 +1,12 @@
 */*Set's border, padding and margin to 0 for all values*/
+/* clearfix */
+.clearFix:after{content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearFix{display:inline-block;}
+/* hidden for ie mac \*/
+* html .clearFix{height:1%;}
+.clearFix{display:block;}
+
+
 {
     padding: 0;
     margin: 0;

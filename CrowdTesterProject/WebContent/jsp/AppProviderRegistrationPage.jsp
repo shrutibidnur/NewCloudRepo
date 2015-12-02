@@ -99,8 +99,7 @@
                     <form:errors path="companyWebsite" cssStyle="color: #ff0000;"/>
 
                 </p>
-            </fieldset>
-                
+            </fieldset>                
           
             <fieldset class="row4">
                 <legend>Terms and Mailing
@@ -116,4 +115,7 @@
             <div><button class="button" >Register &raquo;</button></div>
         </form:form>
     </body>
+    <footer class="clearFix">
+  
+</footer>
 </html>

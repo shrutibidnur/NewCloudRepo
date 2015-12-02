@@ -120,5 +120,7 @@
     <script src="../javascript/sb-admin-2.js"></script>
 
 </body>
-
+<footer class="clearFix">
+  
+</footer>
 </html>

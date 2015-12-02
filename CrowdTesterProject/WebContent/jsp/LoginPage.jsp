@@ -31,17 +31,14 @@
           <li class="parent"> <a href="#">For Clients</a>
           <ul>
               <li> <a href="#">Testing Services</a> </li>
-              <li> <a href="#">How it Works</a> </li>
-              <li> <a href="#">Pricing</a> </li>
-              <li> <a href="#">FAQ</a> </li>
+              
               <li> <a href="../register/showAppProviderRegistration.do">Sign up</a> </li>
             </ul>
           </li>
           <li class="parent"> <a href="#">For Testers</a>
             <ul>
               <li> <a href="../register/showTesterRegistration.do">Become a Tester</a> </li>
-              <li> <a href="#">The Community</a> </li>
-              <li> <a href="#">FAQ</a> </li>
+              
             </ul>
           </li>
           <li> <a href="#">About us</a> </li>
@@ -93,10 +90,6 @@
 <br>
   </body>
   <footer class="clearFix">
-  <div class="wrap clearFix">
-    <p class="floatRight"> Copyright &copy; 2012 <a href="#">Your Name</a> &ndash; All Rights Reserved<br>
-      Template by <a target="_blank" href="http://www.templatestar.net">Templatestar</a> &amp; <a target="_blank" href="http://www.os-templates.com/">OS Templates</a></p>
-    <p class="socialIcons"> <a href="#" class="rss">RSS</a> <a href="#" class="facebook">Facebook</a> <a href="#" class="twitter">Twitter</a> </p>
-  </div>
+  
 </footer>
 </html>

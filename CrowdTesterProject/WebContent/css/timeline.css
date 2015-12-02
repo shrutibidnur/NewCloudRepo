@@ -178,3 +178,11 @@
         border-left-width: 0;
     }
 }
+
+/* clearfix */
+
+.clearFix:after{content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearFix{display:inline-block;}
+/* hidden for ie mac \*/
+* html .clearFix{height:1%;}
+.clearFix{display:block;}

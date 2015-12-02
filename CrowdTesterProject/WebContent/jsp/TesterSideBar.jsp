@@ -39,7 +39,9 @@
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
-            
+  <footer class="clearFix">
+  
+</footer>          
             
             
             

@@ -81,4 +81,7 @@
 			      
 			      </div>
 			      </body>
+			      <footer class="clearFix">
+  
+</footer>
 			      </html>

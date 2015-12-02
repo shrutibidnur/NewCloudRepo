@@ -64,10 +64,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 	
-	<img id="top" src="../images/top.png" alt=""/>
+	
 	<div id="form_container">
 	 <div id="assist-page-wrapper">
-		<h1><a>Assistance Form</a></h1>
+		<!-- <h1><a>Assistance Form</a></h1> -->
 		<form:form id="AssistanceFormID" method="post" modelAttribute="assistanceForm" action="sendAssistanceQuery.do">
 					<div class="form_description">
 			<h2>Assistance Form</h2>
@@ -125,7 +125,7 @@
 		</form:form>	
 		
 	</div>
-	<img id="bottom" src="../images/bottom.png" alt=""/>
+	<!-- <img id="bottom" src="../images/bottom.png" alt=""/> -->
 	
 </div>	
 	 <!-- jQuery -->

@@ -10,7 +10,7 @@
 <script type="text/javascript" language="javascript" src="../javascript/jquery-1.8.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/view.css" media="all"/>
 <script type="text/javascript" src="../javascript/view.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
+<link rel="stylesheet" type="text/css" href="../css/Registration.css"/> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 
@@ -19,7 +19,7 @@
 <body id="main_body" >
 <form:form method="post" modelAttribute="appPlatformDetailsBO" action="../appVendor/uploadApplication.do" class="register">
 
-	<img id="top" src="../images/top.png" alt=""/>
+	<!-- <img id="top" src="../images/top.png" alt=""/> -->
 	<div id="form_container">
 	
 		<h1><a>Payment Scheme</a></h1>
@@ -33,9 +33,9 @@
 		<li id="li_1" >
 		<label class="description" for="element_1">No. of Testers </label>
 		<div>
-			<form:input path="no_of_Testers" id="noOfTestersID" name="element_1" class="element text medium" type="text" maxlength="255"/> 
+			<form:input path="no_of_Testers" id="noOfTestersID" name="element_1" type="text" maxlength="255"/> 
 		</div>
-		<p class="guidelines" id="guide_1"><small>*Number of Testers should not exceed 20</small></p> 
+		
 		</li>		
 		
 		<li id="li_3" >
@@ -47,14 +47,14 @@
 		</c:forEach>
 		
 
-		</span><p class="guidelines" id="guide_3"><small>*Offer:Select 3 platform, you will get 1 platform free!</small></p> 
+		</span>
 		</li>		<li id="li_2" >
 		<label class="description" for="element_2">Total Cost </label>
 		<span class="symbol">$</span>
 		<span>
 			<form:input path="cost" id="costId"/>
 			<!-- <input id="element_2_1" name="element_2_1" class="element text currency" size="10" value="" type="text" /> . -->		
-			<label for="element_2_1">Dollars</label>
+			
 		</span>
 		<!-- <span>
 			<input id="element_2_2" name="element_2_2" class="element text" size="2" maxlength="2" value="" type="text" />
