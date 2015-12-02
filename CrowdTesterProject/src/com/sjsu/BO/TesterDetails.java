@@ -23,7 +23,7 @@ public class TesterDetails {
 	private String lastName;
 	
 	@Column(name = "AGE", nullable = true)
-	private String age;
+	private int age;
 	
 	@Column(name = "GENDER", nullable = true)
 	private String gender;
@@ -112,11 +112,11 @@ public class TesterDetails {
 		this.lastName = lastName;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 

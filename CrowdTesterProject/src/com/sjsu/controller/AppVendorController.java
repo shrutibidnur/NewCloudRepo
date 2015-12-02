@@ -268,6 +268,13 @@ public class AppVendorController {
 		
 		if (appPlatformDetailsBO.getCost() == 0 ){
 			modelAndView.addObject("ERROR", "Cost cannot be zero, please calculate amount");
+			List<String> testPlatformList = new ArrayList<String>();
+			testPlatformList.add("iOS");
+			testPlatformList.add("Android");
+			testPlatformList.add("Windows");
+			testPlatformList.add("Blackberry");
+			appPlatformDetailsBO.setTestPlatformList(testPlatformList);
+			
 			modelAndView.setViewName("/PaymentSchemaOutline");
 			return modelAndView;
 		}
