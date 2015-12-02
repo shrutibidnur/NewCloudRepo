@@ -20,7 +20,7 @@ public interface ITesterDao {
 
 	String testThisApplication(MappingTesterAppBO mappingTesterApp);
 
-	String getAppVendorUsername(String appId);
+	String getAppVendorEmail(String appId);
 
 	String sendAssistanceQuery(AssistanceFormBO assistanceForm);
 
@@ -28,6 +28,6 @@ public interface ITesterDao {
 
 	String sendBugDetails(BugDetailsBO bugDetails);
 
-	List<BugDetailsBO> fetchBugList(String userName, String appID);
+	List<BugDetailsBO> fetchBugList(String userName, int appID);
 
 }

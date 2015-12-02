@@ -98,7 +98,7 @@ public class TesterController {
 		session.setAttribute("sessionTesterDetails", testerDetails);
 		System.out.println("ASSISTANCE"+testerDetails);
 		model.addAttribute("testerDetails", testerDetails);
-		String appVendorEmail = testerService.getAppVendorUsername(appId);
+		String appVendorEmail = testerService.getAppVendorEmail(appId);
 		assistanceForm.setToEmail(appVendorEmail);
 		assistanceForm.setTesterusername(testerDetails.getUserName());
 		System.out.println("ASSITANCE FORM: "+assistanceForm);
@@ -106,7 +106,7 @@ public class TesterController {
 	}
 	
 	@RequestMapping("/sendAssistanceQuery")
-	public String sendAssistanceQuery(HttpServletRequest request,
+	public ModelAndView sendAssistanceQuery(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("assistanceForm") AssistanceFormBO assistanceForm, Model model){
 		System.out.println("METHODNAME ::: sendAssistanceQuery");
 		Date assistanceDate = new Date();
@@ -114,7 +114,17 @@ public class TesterController {
 //		HttpSession session = request.getSession();
 //		TesterDetails testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
 //		session.setAttribute("sessionTesterDetails", testerDetails);
-		
+		ModelAndView modelAndView = new ModelAndView();
+		if (assistanceForm.getSubject() == null || assistanceForm.getSubject() == "") {
+			modelAndView.addObject("ERROR", "Please provide Subject.");
+			modelAndView.setViewName("/TesterAssistanceForm");
+			return modelAndView;
+		}
+		if (assistanceForm.getDescription() == null || assistanceForm.getDescription() == "") {
+			modelAndView.addObject("ERROR", "Please provide Description.");
+			modelAndView.setViewName("/TesterAssistanceForm");
+			return modelAndView;
+		}
 		System.out.println("ASSISTANCE: "+assistanceForm);
 		SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(assistanceForm.getToEmail());
@@ -126,11 +136,20 @@ public class TesterController {
         String DateToStr = assistanceDateFormat.format(assistanceDate);
         System.out.println(DateToStr);
         assistanceForm.setStartdate(DateToStr);
+        try{
         String result = testerService.sendAssistanceQuery(assistanceForm);
+        }
+        catch(Exception e) {
+        	modelAndView.addObject("ERROR", "");
+			modelAndView.setViewName("/TesterAssistanceForm");
+			return modelAndView;
+        }
 		//model.addAttribute("assistanceForm", assistanceForm);
 		//System.out.println("ASSITANCE FORM: "+assistanceForm);
-		
-		return "TesterAssistanceForm";
+        modelAndView.addObject("ERROR", "Email sent sucessfully.");
+		modelAndView.setViewName("/TesterAssistanceForm");
+		return modelAndView;
+		//return "TesterAssistanceForm";
 	}
 	
 	
@@ -155,33 +174,69 @@ public class TesterController {
 	}
 	
 	@RequestMapping("/editTesterProfile")
-	public String editTesterProfile(HttpServletRequest request,
+	public ModelAndView editTesterProfile(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("testerDetails") TesterDetails testerDetails, Model model){
 		System.out.println("Edit And Save TESTER Details :: METHODNAME :: editTesterProfile");
 		HttpSession session = request.getSession();
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("ERROR", "");
 		TesterDetails oldTesterDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
-		/*if (testerDetails.getFirstName() == null || testerDetails.getFirstName() == "") {
-			modelAndView.addObject("ERROR", "Please provide First name");
+		if (testerDetails.getFirstName() == null || testerDetails.getFirstName() == "") {
+			modelAndView.addObject("ERROR", "Please provide First name. Save was unsuccessful.");
 			modelAndView.setViewName("/TesterProfileForm");
 			return modelAndView;
-		}*/
+		}
+		if (testerDetails.getEducation() == null || testerDetails.getEducation() == "") {
+			modelAndView.addObject("ERROR", "Please provide Education. Save was unsuccessful.");
+			modelAndView.setViewName("/TesterProfileForm");
+			return modelAndView;
+		}
+		if (testerDetails.getOccupation() == null || testerDetails.getOccupation() == "") {
+			modelAndView.addObject("ERROR", "Please provide Occupation. Save was unsuccessful.");
+			modelAndView.setViewName("/TesterProfileForm");
+			return modelAndView;
+		}
+		if ( testerDetails.getAge() != (int)testerDetails.getAge()) {
+			modelAndView.addObject("ERROR", "Age should be integer value. Save was unsuccessful.");
+			modelAndView.setViewName("/TesterProfileForm");
+			return modelAndView;
+		}
+		if (!testerDetails.getPassword().equals(testerDetails.getConfirmPassword())) {
+			//if (appVendorDetails.getPassword().toString() != appVendorDetails.getConfirmPassword().toString()) {
+				modelAndView.addObject("ERROR", "Passwords not matching. Save was unsuccessful");
+				modelAndView.setViewName("/TesterProfileForm");
+				return modelAndView;
+		}	
 		oldTesterDetails.setFirstName(testerDetails.getFirstName());
 		oldTesterDetails.setLastName(testerDetails.getLastName());
 		oldTesterDetails.setAge(testerDetails.getAge());
 		oldTesterDetails.setAddress(testerDetails.getAddress());
-		if (testerDetails.getPhoneNumber() != null) {
+		//if (testerDetails.getPhoneNumber() != null) {
 			oldTesterDetails.setPhoneNumber(testerDetails.getPhoneNumber());
-		}
+		//}
 		oldTesterDetails.setPassword(testerDetails.getPassword());
 		oldTesterDetails.setEducation(testerDetails.getEducation());
 		oldTesterDetails.setOccupation(testerDetails.getOccupation());
-		System.out.println(oldTesterDetails);
+		System.out.println("Before save:::"+oldTesterDetails);
+	
+
 		String result = testerService.editTesterProfile(oldTesterDetails);
+		System.out.println(result);
 		if (result.equalsIgnoreCase("SUCCESS")) {
-			return "TesterProfileForm";
+			System.out.println("Success");
+			modelAndView.addObject("ERROR", "");
+			modelAndView.setViewName("/TesterProfileForm");
+			return modelAndView;
+			
+			//return "TesterProfileForm";
 		}
-		return "TesterAssistForm";
+		modelAndView.addObject("ERROR", result);
+		System.out.println(result);
+		//modelAndView.addObject("testerDetails", oldTesterDetails);
+		modelAndView.addObject("testerDetails", oldTesterDetails);
+		modelAndView.setViewName("/TesterProfileForm");
+		return modelAndView;
+		//return "TesterAssistForm";
 	}
 	
 	@RequestMapping("/ajaxShowTestDetails")
@@ -198,7 +253,7 @@ public class TesterController {
 	    for(ApplicationDetails p : applicationDetailList) {
 	    	System.out.println(p.getApplicationID()+ "   " +p.getAppName());
 	    	JSONObject formDetailsJson = new JSONObject();
-	    	formDetailsJson.put("appId" , p.getAppVendorUsername());
+	    	formDetailsJson.put("appId" , p.getAppVendorUsername().getUserName());
 	        formDetailsJson.put("appName" , p.getAppName());
 	        formDetailsJson.put("description", p.getDescription());
 	        formDetailsJson.put("testType" , p.getTestType());
@@ -227,6 +282,7 @@ public class TesterController {
 		System.out.println(testerDetails.getPreferredTestLang());
 		List<ApplicationDetails> appDetailsList = new ArrayList<ApplicationDetails>();
 		
+		session.setAttribute("appDetailsList", appDetailsList);
 		appDetailsList = testerService.getMatchedAppDetails(testerDetails.getPreferredTestLang());
 		System.out.println("Matched Applications: " +appDetailsList);
 		model.addAttribute("appDetailsList", appDetailsList);
@@ -235,11 +291,11 @@ public class TesterController {
 
 	
 	@RequestMapping("/testThisApp")
-	public String testThisApplication(HttpServletRequest request,
-			HttpServletResponse response, Model model,@RequestParam String appID){
+	public ModelAndView testThisApplication(HttpServletRequest request,
+			HttpServletResponse response, Model model,@RequestParam int appID){
 		System.out.println("METHODNAME ::: testThisApplication ::: Asign Application to tester Addition in mapping table");
 		HttpSession session = request.getSession();
-	    String applicationId = appID;
+	    int applicationId = appID;
 		MappingTesterAppBO mappingTesterApp = new MappingTesterAppBO();
 		ApplicationDetails testApplicationDetails = new ApplicationDetails();
 		testApplicationDetails.setApplicationID(appID);
@@ -248,9 +304,32 @@ public class TesterController {
 		mappingTesterApp.setTesterUsername(testerDetails.getUserName());
 		mappingTesterApp.setStatus("ASSIGNED");
 		System.out.println(mappingTesterApp);
-		String result = testerService.testThisApplication(mappingTesterApp);
-		
-		return "SUCCESS";
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("ERROR","");
+		List<ApplicationDetails> appDetailsList = new ArrayList<ApplicationDetails>();
+		appDetailsList = (List<ApplicationDetails>) session.getAttribute("appDetailsList");
+		//appDetailsList = modelAndView.getClass()
+			String result = testerService.testThisApplication(mappingTesterApp);
+			if(result.equalsIgnoreCase("success")){
+				model.addAttribute("appDetailsList", appDetailsList);
+				modelAndView.addObject("appDetailsList", appDetailsList);
+				System.out.println(appDetailsList);
+				session.setAttribute("appDetailsList", appDetailsList);
+			modelAndView.addObject("ERROR", "You have succesfully registered to test this application . Please check pending tasks or profile test details.");
+			modelAndView.setViewName("/ViewApplications");
+			//modelAndView.addObject("testerDetails", testerDetails)
+			return modelAndView;
+			}
+			else{
+				modelAndView.addObject("appDetailsList", appDetailsList);
+				System.out.println(appDetailsList);
+				model.addAttribute("appDetailsList", appDetailsList);
+				session.setAttribute("appDetailsList", appDetailsList);
+			modelAndView.addObject("ERROR", "You have already registered to test this application. Please check pending tasks or profile test details.");
+			modelAndView.setViewName("/ViewApplications");
+			return modelAndView;
+		}
+		//return "SUCCESS";
 	}
 	
 	@RequestMapping("/showAssignedApplications")
@@ -270,7 +349,7 @@ public class TesterController {
 	
 	@RequestMapping("/showReportBugsPage")
 	public String showReportBugsPage(HttpServletRequest request,
-			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam String appID,@RequestParam String appName){
+			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam int appID,@RequestParam String appName){
 		System.out.println("SHOW REPORT BUGS ::: METHODNAME ::: showReportBugsPage");
 		
 		System.out.println("Application ID: "+appID+" Application Name: "+appName);
@@ -283,7 +362,7 @@ public class TesterController {
 	}
 	
 	@RequestMapping("/sendBugDetails")
-	public String sendBugDetails(HttpServletRequest request,
+	public ModelAndView sendBugDetails(HttpServletRequest request,
 			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model){
 		System.out.println("REPORT BUGS ::: METHODNAME ::: sendBugDetails");
 		HttpSession session = request.getSession();
@@ -292,19 +371,45 @@ public class TesterController {
 		
 		Date bugDate = new Date();
 		SimpleDateFormat assistanceDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		ModelAndView modelAndView = new ModelAndView();
+		if (bugDetails.getSeverity() == null || bugDetails.getSeverity() == "") {
+			modelAndView.addObject("ERROR", "Please provide bug severity. Save was unsuccessful.");
+			modelAndView.setViewName("/ReportBugsPage");
+			return modelAndView;
+		}
+		if (bugDetails.getBugDetails() == null || bugDetails.getBugDetails() == "") {
+			modelAndView.addObject("ERROR", "Please provide bug description. Save was unsuccessful.");
+			modelAndView.setViewName("/ReportBugsPage");
+			return modelAndView;
+		}
 		
 		String DateToStr = assistanceDateFormat.format(bugDate);
         System.out.println(DateToStr);
         bugDetails.setDetectedDate(DateToStr);
         bugDetails.setBugStatus("SUBMITTED");
+        try{
 		String result = testerService.sendBugDetails(bugDetails);
-
-		return "ReportBugsPage";
+		modelAndView.addObject("ERROR", "Bug reported sucessfully");
+		modelAndView.setViewName("/ReportBugsPage");
+		return modelAndView;
+        }
+        catch(Exception e){
+        	//String firstWord = null;
+        	String msg = e.getCause().toString();
+        	if(msg.contains("Exception")){
+        	   msg= msg.substring(msg.indexOf("Exception"),msg.length()); 
+        	}
+        	session.setAttribute("sessionTesterDetails", testerDetails);
+		modelAndView.addObject("ERROR",msg );
+		modelAndView.setViewName("/ReportBugsPage");
+		return modelAndView;
+		//return "ReportBugsPage";
+		}
 	}
 	
 	@RequestMapping("/showViewBugsPage")
 	public ModelAndView showViewBugsPage(HttpServletRequest request,
-			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam String appID){
+			HttpServletResponse response,@ModelAttribute("bugDetails") BugDetailsBO bugDetails, Model model,@RequestParam int appID){
 		System.out.println("SHOW REPORTED BUGS ::: METHODNAME ::: showViewBugsPage");
 		
 //		Set Application Details

@@ -14,8 +14,8 @@ public class AssistanceFormBO {
 	
 	@Id
 	@Column(name = "Query_ID", nullable = false)
-	@SequenceGenerator(name="mapping_seq", sequenceName="mappingID_generator")
-	@GeneratedValue(strategy=GenerationType.AUTO , generator="mapping_seq")
+//	@SequenceGenerator(name="mapping_seq", sequenceName="mappingID_generator")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 	
 	@Column(name = "TO_EMAIL", nullable = false)

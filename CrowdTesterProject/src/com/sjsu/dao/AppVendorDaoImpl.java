@@ -17,7 +17,7 @@ import com.sjsu.BO.TesterDetails;
 @Repository
 public class AppVendorDaoImpl implements IAppVendorDao{
 	private SessionFactory sessionFactory;
-	private String appID;
+	private int appID;
 	public SessionFactory getSessionFactory() {
 	return sessionFactory;
 	}

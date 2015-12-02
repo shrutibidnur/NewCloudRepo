@@ -18,7 +18,7 @@ public class MappingTesterAppBO {
 	@Column(name = "MAPPING_ID", nullable = false)
 	@SequenceGenerator(name="mapping_seq", sequenceName="mappingID_generator")
 	@GeneratedValue(strategy=GenerationType.AUTO , generator="mapping_seq")
-	private String mappingID;
+	private int mappingID;
 	
 	@Column(name = "TESTER_USERNAME", nullable = false)
 	private String testerUsername;
@@ -32,11 +32,11 @@ public class MappingTesterAppBO {
 	@Column(name = "STATUS", nullable = false)
 	private String status;
 
-	public String getMappingID() {
+	public int getMappingID() {
 		return mappingID;
 	}
 
-	public void setMappingID(String mappingID) {
+	public void setMappingID(int mappingID) {
 		this.mappingID = mappingID;
 	}
 

@@ -117,6 +117,7 @@
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
 		</li>
 			</ul>
+			<div align="center"><span class="error" style="color:red" >${ERROR}</span></div>
 		</form:form>
 	</div>
 	<img id="bottom" src="../images/bottom.png" alt=""/>

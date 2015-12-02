@@ -53,6 +53,8 @@ $(document).ready( function() {
 	    	$("#Age").prop("disabled",false)
 	    	$("#Edu").prop("disabled",false)
 	    	$("#Occupation").prop("disabled",false)
+	    	$("#password").prop("disabled",false)
+	    	$("#confirmPassword").prop("disabled",false)
 	    	$("#saveProfileData").prop("disabled",false)
 	    	
 	    });
@@ -167,7 +169,6 @@ $('#hmenu>ul').on('click', '.nav-click', function(){
 						"<th>Application Name</th>" +
 						"<th>Description</th>" +
 						"<th>Test Type</th>" +
-						"<th>Product OS</th>" +
 						"<th>Test Deadline</th></tr></thead>"
 				
 				$.each(response, function(i) {
@@ -175,7 +176,6 @@ $('#hmenu>ul').on('click', '.nav-click', function(){
 					result += "<td>" +response[i].appName + "</td>";
 					result += "<td>" +response[i].description + "</td>";
 					result += "<td>" +response[i].testType + "</td>";
-					result += "<td>" +response[i].productOS + "</td>";
 					result += "<td>" +response[i].testDeadline + "</td>";
 					result += "<td><a href='../tester/showAssistanceform.do?appId="+response[i].appId+"'>Send Query</a></td>";
 					result += "</tr></tbody>";

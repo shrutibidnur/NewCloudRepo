@@ -30,7 +30,7 @@
     <div class="tabs">
     <ul class="tab-links">
         <li class="active"><a href="#tab1">My Profile</a></li>
-        <li><a href="#tab2">Personal</a></li>
+       <!--  <li><a href="#tab2">Personal</a></li> -->
         <li><a id="testDetails" href="#tab3">Test Details</a></li>
         
     </ul>
@@ -45,7 +45,7 @@
             <div>
              
              <br/><br/><br/>
-             <table width=100%>
+             <%-- <table width=100%>
              <tr>
              <td><label>Your email        : </label></td>
              <td><label>LinkedIn url        : </label></td>
@@ -82,13 +82,8 @@
              <td colspan="2" align="center"><form:input path="password" /></td>
              </tr>
              </table>
-       
-            </div>
-        </div>
- 
-        <div id="tab2" class="tab">
-        
-         <table width=100% align="center">
+ --%>       
+ <table width=100% align="center">
              <tr>
              <td><label>Your first name        : </label></td>
              <td align="left"><label>Your last name         : </label></td>
@@ -127,6 +122,15 @@
              <td><form:input id="Edu" path="education" cssStyle="width: 95%" disabled="true"/></td>
              <td><form:input id="Occupation" path="occupation" cssStyle="width: 95%" disabled="true"/></td>
              </tr>
+             <tr><td>&nbsp;</td></tr>
+             <tr>
+             <td><label>Password        : </label></td>
+             <td><label>Confirm Password       : </label></td>
+             </tr>
+             <tr>
+             <td><form:input id="password" path="password" type="password" cssStyle="width: 95%" disabled="true"/></td>
+             <td><form:input id="confirmPassword" path="confirmPassword" value="${password}" type="password" cssStyle="width: 95%" disabled="true"/></td>
+             </tr>
              <!--  <tr>
              <td align="left"><a class="editEdu" href="#" >change</a>
              <a hidden="true" class="saveEdu" href="#" >save</a></td>
@@ -137,9 +141,16 @@
              <tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr>
              
          </table>
+          <div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div>
         <button type="button" id="editProfileData" value="EDIT">EDIT</button>
        <!--  <button type="button" id="saveProfileData" value="SAVE">SAVE</button> -->
         <form:button id="saveProfileData" value="SAVE" disabled="true">SAVE</form:button>
+            </div>
+        </div>
+ 
+        <div id="tab2" class="tab">
+        
+        
         
         </div>
  

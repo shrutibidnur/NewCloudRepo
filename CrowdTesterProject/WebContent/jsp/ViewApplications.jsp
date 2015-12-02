@@ -95,11 +95,11 @@
 		<tr>
 			<th>Application Name</th>
 			<th> Discription</th>
-			<th>Product OS</th>
+			<!-- <th>Product OS</th> -->
 			<th>Dead Line</th>
 			<th>Download URL</th>
 			<th>App Provider</th>
-			<th>Reporting Language</th>
+			<th>App testing Language</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -107,23 +107,19 @@
 			<tr>
 			<td><c:out value="${applications.appName}"></c:out></td>
 			<td><c:out value="${applications.description}"></c:out></td>
-			<td><c:out value="${applications.productOS}"></c:out></td>
+			<%-- <td><c:out value="${applications.productOS}"></c:out></td> --%>
 			<td><c:out value="${applications.testDeadLine}"></c:out></td>
 			<td><c:out value="${applications.downloadLink}"></c:out></td>
-			<td><c:out value="${applications.appVendorUsername}"></c:out></td>
-			<td><c:out value="${applications.reportingLanguage}"></c:out></td>
+			<td><c:out value="${applications.appVendorUsername.userName}"></c:out></td>
+			<td><c:out value="${applications.appLanguage}"></c:out></td>
 			<td><a href="testThisApp.do?appID=${applications.applicationID}">Test This App</a></td>
 			</tr>
 			</c:forEach>
-		
 		</tbody>
-
-
-
-	</table>
+</table>
 
 </form:form>
-                       
+<p><div align="center"><span class="error" style="color:red" >${ERROR}</span></div></p>                       
                         
                         
                         <!-- /.panel-body -->

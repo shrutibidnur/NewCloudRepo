@@ -119,6 +119,7 @@
 			    <input type="hidden" name="form_id" value="1076669" />
 			    
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Send Email" />
+				<p><div align="center"><span class="error" style="color:red" >${ERROR}</span></div></p>
 		</li>
 			</ul>
 		</form:form>	

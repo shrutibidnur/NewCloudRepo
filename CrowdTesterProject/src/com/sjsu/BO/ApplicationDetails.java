@@ -17,9 +17,9 @@ public class ApplicationDetails {
 	
 	@Id
 	@Column(name = "APPLICATION_ID", nullable = false)
-	@SequenceGenerator(name="my_seq", sequenceName="applicationID_generator")
-	@GeneratedValue(strategy=GenerationType.AUTO , generator="my_seq")
-	private String applicationID;
+	//@SequenceGenerator(name="my_seq", sequenceName="applicationID_generator")
+	@GeneratedValue(strategy=GenerationType.AUTO )
+	private int applicationID;
 	
 	@Column(name = "APP_NAME", nullable = false)
 	private String appName;
@@ -73,11 +73,11 @@ public class ApplicationDetails {
 	@Column(name = "COST", nullable = false)
 	private int cost;
 
-	public String getApplicationID() {
+	public int getApplicationID() {
 		return applicationID;
 	}
 
-	public void setApplicationID(String applicationID) {
+	public void setApplicationID(int applicationID) {
 		this.applicationID = applicationID;
 	}
 

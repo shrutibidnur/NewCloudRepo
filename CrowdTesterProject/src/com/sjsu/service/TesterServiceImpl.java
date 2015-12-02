@@ -60,8 +60,8 @@ public class TesterServiceImpl implements ITesterService{
 	}
 
 	@Override
-	public String getAppVendorUsername(String appId) {
-		String appVendorEmail = testerDao.getAppVendorUsername(appId);
+	public String getAppVendorEmail(String appId) {
+		String appVendorEmail = testerDao.getAppVendorEmail(appId);
 		return appVendorEmail;
 	}
 
@@ -84,7 +84,7 @@ public class TesterServiceImpl implements ITesterService{
 	}
 
 	@Override
-	public List<BugDetailsBO> fetchBugList(String userName, String appID) {
+	public List<BugDetailsBO> fetchBugList(String userName, int appID) {
 		List<BugDetailsBO> bugList = new ArrayList<BugDetailsBO>();
 		bugList = testerDao.fetchBugList(userName,appID);
 		return bugList;

@@ -74,8 +74,6 @@ public class AppVendorController {
 		appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
 		System.out.println("profile"+appVendorDetails);
 		session.setAttribute("sessionAppVendorDetails", appVendorDetails);
-		
-		
 		model.addAttribute("appVendorDetails", appVendorDetails);
 		return "AppVendorProfileForm";
 	}
@@ -110,6 +108,7 @@ public class AppVendorController {
 		System.out.println("Edit And Save App Vendor Details :: METHODNAME :: editAppVendorProfile");
 		HttpSession session = request.getSession();
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("ERROR", "");
 		//session.setAttribute("sessionAppVendorDetails", appVendorDetails);
 		
 		if (appVendorDetails.getCompanyName() == null || appVendorDetails.getCompanyName() == "") {

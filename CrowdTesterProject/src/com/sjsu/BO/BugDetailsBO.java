@@ -17,9 +17,9 @@ public class BugDetailsBO {
 	
 	@Id
 	@Column(name = "BUG_ID", nullable = false)
-	@SequenceGenerator(name="bug_seq", sequenceName="bugID_generator")
-	@GeneratedValue(strategy=GenerationType.AUTO , generator="bug_seq")
-	private String bugId;
+	//@SequenceGenerator(name="bug_seq", sequenceName="bugID_generator")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int bugId;
 	
 	@Column(name = "SEVERITY", nullable = false)
 	private String severity;
@@ -41,11 +41,11 @@ public class BugDetailsBO {
 	@Column(name = "BUG_STATUS", nullable = false)
 	private String bugStatus;
 
-	public String getBugId() {
+	public int getBugId() {
 		return bugId;
 	}
 
-	public void setBugId(String bugId) {
+	public void setBugId(int bugId) {
 		this.bugId = bugId;
 	}
 

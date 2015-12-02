@@ -50,7 +50,7 @@ public class TesterDaoImpl implements ITesterDao{
 	     } catch(Exception e) {
 		System.out.println(e);
 		session.getTransaction().rollback();
-		result = "FAIL";
+		result = e.getMessage();
 		return result;
 	}
 		return result;
@@ -67,8 +67,8 @@ public class TesterDaoImpl implements ITesterDao{
 				.setParameter("userName",userName);
 				List appList = query.list();
 				System.out.println(appList);
+		if (!appList.isEmpty()) {
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
-
 		Disjunction disjunction = Restrictions.disjunction();
 		Iterator<String> iterator = appList.iterator();
 		while (iterator.hasNext()) {
@@ -77,6 +77,7 @@ public class TesterDaoImpl implements ITesterDao{
 		}
 		criteria.add(disjunction);
         applicationDetailsList = (List<ApplicationDetails>) criteria.list();
+		}
         System.out.println(applicationDetailsList);
         session.getTransaction().commit();
 		return applicationDetailsList;
@@ -89,7 +90,7 @@ public class TesterDaoImpl implements ITesterDao{
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
-		criteria.add(Restrictions.eq("appLanguage",preferredTestLang).ignoreCase());
+	//	criteria.add(Restrictions.eq("appLanguage",preferredTestLang).ignoreCase());
 		applicationDetailsList = (List<ApplicationDetails>) criteria.list();
 		session.getTransaction().commit();
 		return applicationDetailsList;
@@ -131,8 +132,8 @@ public class TesterDaoImpl implements ITesterDao{
 	}
 
 	@Override
-	public String getAppVendorUsername(String appId) {
-		System.out.println("Fetch Application ID for Assistance Form");
+	public String getAppVendorEmail(String appId) {
+		System.out.println("Fetch Application ID for Assistance Form: " +appId);
 		Session session = getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
@@ -151,7 +152,7 @@ public class TesterDaoImpl implements ITesterDao{
 		String result = "SUCCESS";
 		Session session = getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.saveOrUpdate(assistanceForm);
+		session.save(assistanceForm);
 		session.getTransaction().commit();
 		return result;
 	}
@@ -197,7 +198,7 @@ public class TesterDaoImpl implements ITesterDao{
 	}
 
 	@Override
-	public List<BugDetailsBO> fetchBugList(String userName, String appID) {
+	public List<BugDetailsBO> fetchBugList(String userName, int appID) {
 		System.out.println("FETCH BUG DETAILS ::: METHODNAME ::: fetchBugList");
 		List< BugDetailsBO> bugList = new ArrayList<BugDetailsBO>();
 		Session session = getSessionFactory().getCurrentSession();
@@ -206,7 +207,7 @@ public class TesterDaoImpl implements ITesterDao{
 //		Query to fetch the bug Details
 		Criteria criteria = session.createCriteria(BugDetailsBO.class);
 		Criterion username = Restrictions.eq("testerDetails.userName",userName).ignoreCase();
-        Criterion applicationId = Restrictions.eq("appDetails.applicationID",appID).ignoreCase();
+        Criterion applicationId = Restrictions.eq("appDetails.applicationID",appID);
         LogicalExpression Exp = Restrictions.and(username,applicationId);
         criteria.add(Exp);
         bugList = (List<BugDetailsBO>) criteria.list();

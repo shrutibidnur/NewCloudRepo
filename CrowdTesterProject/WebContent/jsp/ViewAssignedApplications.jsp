@@ -95,11 +95,11 @@
 		<tr>
 			<th>Application Name</th>
 			<th> Discription</th>
-			<th>Product OS</th>
+			<!-- <th>Product OS</th> -->
 			<th>Dead Line</th>
 			<th>Download URL</th>
 			<th>App Provider</th>
-			<th>Reporting Language</th>
+			<th>App testing Language</th>
 			<th>Status</th>
 		</tr>
 		</thead>
@@ -108,11 +108,11 @@
 			<tr>
 			<td><c:out value="${applications.applicationId.appName}"></c:out></td>
 			<td><c:out value="${applications.applicationId.description}"></c:out></td>
-			<td><c:out value="${applications.applicationId.productOS}"></c:out></td>
+			<%-- <td><c:out value="${applications.applicationId.productOS}"></c:out></td> --%>
 			<td><c:out value="${applications.applicationId.testDeadLine}"></c:out></td>
 			<td><c:out value="${applications.applicationId.downloadLink}"></c:out></td>
-			<td><c:out value="${applications.applicationId.appVendorUsername}"></c:out></td>
-			<td><c:out value="${applications.applicationId.reportingLanguage}"></c:out></td>
+			<td><c:out value="${applications.applicationId.appVendorUsername.userName}"></c:out></td>
+			<td><c:out value="${applications.applicationId.appLanguage}"></c:out></td>
 			<td><c:out value="${applications.status}"></c:out></td>
 			<td><a href="showReportBugsPage.do?appID=${applications.applicationId.applicationID}&appName=${applications.applicationId.appName}">Report Bugs</a></td>
 			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td>

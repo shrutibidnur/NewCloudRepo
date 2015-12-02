@@ -36,7 +36,7 @@ import javax.persistence.Transient;
 		@Id
 		@JoinColumn(name = "App_Details_Application_ID", referencedColumnName = "APPLICATION_ID")
 		@ManyToOne
-		private String app_Details_Application_ID;
+		private int app_Details_Application_ID;
 		
 		@Transient
 		private List<String> testPlatformList;
@@ -106,7 +106,7 @@ import javax.persistence.Transient;
 
 
 
-		public String getApp_Details_Application_ID() {
+		public int getApp_Details_Application_ID() {
 			return app_Details_Application_ID;
 		}
 
@@ -117,7 +117,7 @@ import javax.persistence.Transient;
 		}*/		
 		
 
-		public void setApp_Details_Application_ID(String appID) {
+		public void setApp_Details_Application_ID(int appID) {
 			// TODO Auto-generated method stub
 			this.app_Details_Application_ID = appID;
 		}
