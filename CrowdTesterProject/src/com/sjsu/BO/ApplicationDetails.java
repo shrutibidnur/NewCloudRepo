@@ -17,7 +17,6 @@ public class ApplicationDetails {
 	
 	@Id
 	@Column(name = "APPLICATION_ID", nullable = false)
-	//@SequenceGenerator(name="my_seq", sequenceName="applicationID_generator")
 	@GeneratedValue(strategy=GenerationType.AUTO )
 	private int applicationID;
 	
