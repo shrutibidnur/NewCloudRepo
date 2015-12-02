@@ -26,9 +26,9 @@
                             <a href="../tester/showProfileform.do"><i></i>Profile</a>
                         </li>
                         
-                        <li>
+                       <!--  <li>
                             <a href="../tester/showBillingform.do"><i></i> Payment Info</a>
-                        </li>
+                        </li> -->
                         
                         <!--  <li>
                             <a href="../tester/showAssistanceform.do"><i></i> Assistance Form</a>

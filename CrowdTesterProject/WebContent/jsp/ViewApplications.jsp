@@ -94,13 +94,13 @@
 		<thead>
 		<tr>
 			<th>Application Name</th>
-			<th> Discription</th>
 			<!-- <th>Product OS</th> -->
+			<th> Description</th>
 			<th>Dead Line</th>
 			<th>Download URL</th>
 			<th>App Provider</th>
 			<th>App testing Language</th>
-		</tr>
+</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="applications" items="${appDetailsList}">

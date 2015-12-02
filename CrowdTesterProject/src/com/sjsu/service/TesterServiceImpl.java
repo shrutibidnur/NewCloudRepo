@@ -90,4 +90,16 @@ public class TesterServiceImpl implements ITesterService{
 		return bugList;
 	}
 
+	@Override
+	public String updateCreditRanking(TesterDetails sessionTesterDetails) {
+		String result = testerDao.updateCreditRanking(sessionTesterDetails);
+		return result;
+	}
+
+	@Override
+	public TesterDetails setRefreshedTesterData(TesterDetails testerDetails) {
+		TesterDetails refreshedTesterData = testerDao.setRefreshedTesterData(testerDetails);
+		return refreshedTesterData;
+	}
+
 }

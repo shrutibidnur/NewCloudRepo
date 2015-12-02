@@ -67,7 +67,9 @@ public class TesterDaoImpl implements ITesterDao{
 				.setParameter("userName",userName);
 				List appList = query.list();
 				System.out.println(appList);
-		if (!appList.isEmpty()) {
+		
+		if(!appList.isEmpty()) {
+
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
 		Disjunction disjunction = Restrictions.disjunction();
 		Iterator<String> iterator = appList.iterator();
@@ -90,7 +92,6 @@ public class TesterDaoImpl implements ITesterDao{
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
-	//	criteria.add(Restrictions.eq("appLanguage",preferredTestLang).ignoreCase());
 		applicationDetailsList = (List<ApplicationDetails>) criteria.list();
 		session.getTransaction().commit();
 		return applicationDetailsList;
@@ -218,6 +219,56 @@ public class TesterDaoImpl implements ITesterDao{
 		return bugList;
 		
 		
+	}
+
+	@Override
+	public String updateCreditRanking(TesterDetails sessionTesterDetails) {
+		System.out.println("UPDATE credits and Ranking :: METHOD NAME :: updateCreditRanking");
+	
+		int accumulatedCredit = 0;
+		
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Criteria criteria = session.createCriteria(TesterDetails.class);
+		Criterion username = Restrictions.eq("userName",sessionTesterDetails.getUserName()).ignoreCase();
+        criteria.add(username);
+        TesterDetails testerDetails = (TesterDetails) criteria.uniqueResult();
+        accumulatedCredit = testerDetails.getAccumulatedCredit();
+        accumulatedCredit = accumulatedCredit + sessionTesterDetails.getCredit();
+        testerDetails.setAccumulatedCredit(accumulatedCredit);
+        testerDetails.setCredit(0);
+        
+        if(accumulatedCredit>=300) {
+        	testerDetails.setRanking(1);
+        } else if (accumulatedCredit>=250) {
+			testerDetails.setRanking(2);
+		} else if (accumulatedCredit>=200) {
+			testerDetails.setRanking(3);
+		} else {
+			testerDetails.setRanking(0);
+		}
+        try {
+		
+		session.saveOrUpdate(testerDetails);
+		return "SUCCESS";
+		}
+        catch(Exception e){
+		return "Fail";
+        }
+		
+	}
+
+	@Override
+	public TesterDetails setRefreshedTesterData(TesterDetails testerDetails) {
+		System.out.println("Get refreshed Tester Details :: methodname :: setRefreshedTesterData");
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Criteria criteria = session.createCriteria(TesterDetails.class);
+		TesterDetails refreshedTesterDetails = (TesterDetails) criteria.uniqueResult();
+		
+		return refreshedTesterDetails;
 	}
 
 }

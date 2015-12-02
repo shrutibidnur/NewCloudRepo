@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sjsu.BO.AppPlatformDetailsBO;
 import com.sjsu.BO.AppVendorDetails;
 import com.sjsu.BO.ApplicationDetails;
+import com.sjsu.BO.BugDetailsBO;
+import com.sjsu.BO.MappingTesterAppBO;
 import com.sjsu.BO.TesterDetails;
 import com.sjsu.BO.AppVendorDetails;
 import com.sjsu.service.IAppVendorService;
@@ -59,9 +61,13 @@ public class AppVendorController {
 			HttpServletResponse response, @ModelAttribute("appVendorDetails") AppVendorDetails appVendorDetails, Model model){
 		System.out.println("dashboard:"+appVendorDetails);
 		HttpSession session = request.getSession();
+		appVendorDetails = (AppVendorDetails) session.getAttribute("sessionAppVendorDetails");
+		System.out.println("Session AppVendorDetails: "+appVendorDetails);
+		List<ApplicationDetails> appDetailsList = new ArrayList<ApplicationDetails>();
+		appDetailsList = appVendorService.getApplicationDetails(appVendorDetails);
 		//session.setAttribute("sessionAppVendorDetails", appVendorDetails);
 		//session.getAttribute("sessionAppVendorDetails");
-		model.addAttribute("appVendorDetails", appVendorDetails);
+		model.addAttribute("appDetailsList", appDetailsList);
 		
 		return "AppVendorDashboard";
 	}
@@ -308,6 +314,75 @@ public class AppVendorController {
 		
 	}
 	
+	@RequestMapping("/viewBugsForAppProvider")
+	public ModelAndView viewBugsForAppProvider(HttpServletRequest request,
+			HttpServletResponse response, Model model,@RequestParam int appID){
+		System.out.println("METHODNAME ::: viewBugsForAppProvider ::: Get the bug details for the uploaded application");
+		HttpSession session = request.getSession();
+	    int applicationId = appID;
+		//MappingTesterAppBO mappingTesterApp = new MappingTesterAppBO();
+		ApplicationDetails testApplicationDetails = new ApplicationDetails();
+		testApplicationDetails.setApplicationID(appID);
+		
+		System.out.println(testApplicationDetails);
+		List<BugDetailsBO> bugList = appVendorService.viewBugsForAppProvider(testApplicationDetails);
+		session.setAttribute("sessionBugList", bugList);
+		
+		return new ModelAndView("BugDetailsForAppProvider","bugList",bugList);
+	}
 	
+	@RequestMapping("/bugAccept")
+	public ModelAndView bugAccept(HttpServletRequest request,
+			HttpServletResponse response, Model model,@RequestParam int bugId,@RequestParam String status,@RequestParam String detectedBy,@RequestParam int appId){
+		System.out.println("METHODNAME ::: viewBugsForAppProvider ::: Get the bug details for the uploaded application");
+		HttpSession session = request.getSession();
+		
+//		Change the status id the BUg And give credits to the tester
+		String result = appVendorService.changeBugStatus(bugId,status,detectedBy);
+		
+//		Get the results back for display
+		ApplicationDetails testApplicationDetails = new ApplicationDetails();
+		testApplicationDetails.setApplicationID(appId);
+		System.out.println(testApplicationDetails);
+		List<BugDetailsBO> bugList = appVendorService.viewBugsForAppProvider(testApplicationDetails);
+		
+		//List<BugDetailsBO> bugList = (List<BugDetailsBO>) session.getAttribute("sessionBugList");
+		
+		return new ModelAndView("BugDetailsForAppProvider","bugList",bugList);
+	}
+	
+	@RequestMapping("/bugReject")
+	public ModelAndView bugReject(HttpServletRequest request,
+			HttpServletResponse response, Model model,@RequestParam int bugId,@RequestParam String status,@RequestParam String detectedBy,@RequestParam int appId){
+		System.out.println("METHODNAME ::: Reject Bug ::: Deletes Bugs Assigned");
+		HttpSession session = request.getSession();
+		
+//		Change the status id the BUg And give credits to the tester
+		String result = appVendorService.deleteAssignedBugs(bugId,status,detectedBy);
+		
+//		Get the results back for display
+		ApplicationDetails testApplicationDetails = new ApplicationDetails();
+		testApplicationDetails.setApplicationID(appId);
+		System.out.println(testApplicationDetails);
+		List<BugDetailsBO> bugList = appVendorService.viewBugsForAppProvider(testApplicationDetails);
+		
+		//List<BugDetailsBO> bugList = (List<BugDetailsBO>) session.getAttribute("sessionBugList");
+		
+		return new ModelAndView("BugDetailsForAppProvider","bugList",bugList);
+	}
+	
+	@RequestMapping("/viewTesters")
+	public ModelAndView viewTesters(HttpServletRequest request,
+			HttpServletResponse response, Model model,@RequestParam String appID){
+		System.out.println("METHODNAME ::: viewTesters ::: Get the Tester details for the uploaded application");
+		HttpSession session = request.getSession();
+	    String applicationId = appID;
+		List<TesterDetails> testerDetailsList = new ArrayList<TesterDetails>();
+		testerDetailsList = appVendorService.viewTesterDetailsAssigned(appID);
+		
+		//session.setAttribute("sessionBugList", bugList);
+		
+		return new ModelAndView("ViewTesterDetailsForApplications","testerDetailsList",testerDetailsList);
+	}
 	
 }

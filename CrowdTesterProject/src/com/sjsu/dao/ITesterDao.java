@@ -30,4 +30,8 @@ public interface ITesterDao {
 
 	List<BugDetailsBO> fetchBugList(String userName, int appID);
 
+	String updateCreditRanking(TesterDetails sessionTesterDetails);
+
+	TesterDetails setRefreshedTesterData(TesterDetails testerDetails);
+
 }

@@ -60,24 +60,27 @@ public class TesterDetails {
 	private String experience;
 	
 	@Column(name = "CREDITS", nullable = false)
-	private String credit="1";
+	private int credit;
 	
 	@Column(name = "RANKING", nullable = false)
-	private String ranking="1";
+	private int ranking;
 	
-	public String getCredit() {
+	@Column(name = "accumulatedCredit", nullable = true)
+	private int accumulatedCredit;
+	
+	public int getCredit() {
 		return credit;
 	}
 
-	public void setCredit(String credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 
-	public String getRanking() {
+	public int getRanking() {
 		return ranking;
 	}
 
-	public void setRanking(String ranking) {
+	public void setRanking(int ranking) {
 		this.ranking = ranking;
 	}
 
@@ -85,7 +88,13 @@ public class TesterDetails {
 	@Transient
 	private String confirmPassword;
 	
-	
+	public int getAccumulatedCredit() {
+		return accumulatedCredit;
+	}
+
+	public void setAccumulatedCredit(int accumulatedCredit) {
+		this.accumulatedCredit = accumulatedCredit;
+	}
 	
 
 	public String getConfirmPassword() {
@@ -192,16 +201,6 @@ public class TesterDetails {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "TesterDetails [firstName=" + firstName + ", lastName="
-				+ lastName + ", age=" + age + ", gender=" + gender
-				+ ", address=" + address + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", education=" + education
-				+ ", occupation=" + occupation + ", userName=" + userName + ", password="
-				+ password + "]";
-	}
-
 	public String getPreferredTestLang() {
 		return preferredTestLang;
 	}
@@ -217,6 +216,22 @@ public class TesterDetails {
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
+
+	@Override
+	public String toString() {
+		return "TesterDetails [firstName=" + firstName + ", lastName="
+				+ lastName + ", age=" + age + ", gender=" + gender
+				+ ", address=" + address + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + ", education=" + education
+				+ ", occupation=" + occupation + ", profileImage="
+				+ profileImage + ", userName=" + userName + ", password="
+				+ password + ", preferredTestLang=" + preferredTestLang
+				+ ", experience=" + experience + ", credit=" + credit
+				+ ", ranking=" + ranking + ", confirmPassword="
+				+ confirmPassword + "]";
+	}
+
+	
 	
 	
 

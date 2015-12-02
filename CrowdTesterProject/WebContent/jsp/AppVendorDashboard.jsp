@@ -101,6 +101,43 @@
                     <h3 class="page-header"><button type="button" class="btn btn-primary">Create a new Project</button></h3>
                 </div>
             </div>
+            
+        <div>
+       
+        
+        <div id="box">
+  <h3>Personal Activity Plan</h3>
+  <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
+  <table width="100%" class='order-table table'>
+    <thead>
+      <tr>
+        <th>App ID</th>
+        <th>App Name</th>
+        <th>Description</th>
+        <th>Test DeadLine</th>
+        <th>Download Link</th>
+        <th>Cost Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach var="applications" items="${appDetailsList}">
+      	<tr>
+      		<td><c:out value="${applications.applicationID}"></c:out></td>
+			<td><c:out value="${applications.appName}"></c:out></td>
+			<td><c:out value="${applications.description}"></c:out></td>
+			<td><c:out value="${applications.testDeadLine}"></c:out></td>
+			<td><c:out value="${applications.downloadLink}"></c:out></td>
+			<td><c:out value="${applications.cost}"></c:out></td>
+			<td><a href="viewBugsForAppProvider.do?appID=${applications.applicationID}">View Bugs</a></td>
+			<td><a href="viewTesters.do?appID=${applications.applicationID}">View Testers</a></td>
+			</tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </form:form>
+</div>
+        
+        </div>    
 
     </div>
     <!-- /#wrapper -->
@@ -121,7 +158,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
+</div>
 </body>
 
 </html>

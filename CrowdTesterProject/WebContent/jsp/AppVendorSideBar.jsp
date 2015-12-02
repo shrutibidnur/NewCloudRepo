@@ -26,10 +26,10 @@
                             <a href="../appVendor/showAppVendorProfileform.do"><i></i>Profile</a>
                         </li>
           
-                        <li>
+                       <!--  <li>
                             <a href="../appVendor/showAppVendorAssistform.do"><i></i> Assistance</a>
                         </li>
-                        
+                         -->
                          <li>
                             <a href="../appVendor/showUploadAppForm.do"><i></i>New Test Request </a>
                         </li>

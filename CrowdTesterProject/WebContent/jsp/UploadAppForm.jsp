@@ -56,7 +56,7 @@
                 <p>
                     <label>App Size
                     </label>
-                    <form:input path="appSize" type="text" value="GB" />
+                    <form:input path="appSize" type="text" placeholder="GB" />
                 </p>
                 <p>
                     <label>App Language *</label>
@@ -80,7 +80,7 @@
                 <p>
                     <label>Upload app file*
                     </label>
-                    <form:input path="downloadLink" class="long" type="text" value="Copy the link here" />
+                    <form:input path="downloadLink" class="long" type="text" placeholder="Copy the link here" />
 
                 </p>
                  <p>

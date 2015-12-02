@@ -72,7 +72,9 @@ public class TesterController {
 		//session.setAttribute("sessionTesterDetails", testerDetails);
 		session.getAttribute("testerDetails");
 		System.out.println("SESSION DASHBOARD" +session.getAttribute("sessionTesterDetails"));
-		model.addAttribute("testerDetails", testerDetails);
+		testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		TesterDetails refreshedTesterDetails = testerService.setRefreshedTesterData(testerDetails);
+		model.addAttribute("testerDetails", refreshedTesterDetails);
 		
 		return "TesterDashboard";
 	}
@@ -430,5 +432,19 @@ public class TesterController {
 		
 //		Return the result Page
 		return new ModelAndView ("TesterBugDetails","bugList",bugList);
+	}
+	
+	
+	@RequestMapping("/showPaymentSuccessPage")
+	public ModelAndView showPaymentSuccessPage(HttpServletRequest request,
+			HttpServletResponse response,@ModelAttribute("testerDetails") TesterDetails testerDetails, Model model){
+		System.out.println("SHOW Payment Success Page ::: METHODNAME ::: showPaymentSuccessPage");
+		HttpSession session = request.getSession();
+		TesterDetails sessionTesterDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
+		//System.out.println(testerDetails);
+		System.out.println(sessionTesterDetails);
+		String result = testerService.updateCreditRanking(sessionTesterDetails);
+		System.out.println("saving credits and ranking:::"+result);
+		return new ModelAndView ("TesterPaymentSuccess","testerDetails",testerDetails);
 	}
 }
