@@ -44,7 +44,7 @@
                 
                 </fieldset>
                <br></br>
-               <fieldset class="row1">
+               <fieldset>
                 <div>
                     <label>Password*
                     </label>
@@ -63,7 +63,7 @@
             </fieldset>
             <br></br>
             
-            <fieldset class="row2">
+            <fieldset class="row3">
                 <legend>Personal Details
                 </legend>
                 <p>

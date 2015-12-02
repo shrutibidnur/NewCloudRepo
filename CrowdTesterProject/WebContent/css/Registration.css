@@ -65,6 +65,7 @@ form.register fieldset.row1
     float:left;
     border-top:1px;
     margin-bottom:15px;
+    border-top:1px solid #80c3ff;
 }
 
 form.register fieldset.row1 label{
@@ -78,6 +79,7 @@ form.register fieldset.row1 label{
 form.register fieldset.row2
 {
     border-top:1px solid #80c3ff;
+    width:870px;
     /* border-right:1px solid #80c3ff; */
     height:220px;
     padding:5px;
@@ -94,7 +96,6 @@ form.register fieldset.row3
 form.register fieldset.row4
 {
     border-top:1px solid #80c3ff;
-    /* border-right:1px solid #80c3ff; */
     padding:5px;
     float:left;
     clear:both;

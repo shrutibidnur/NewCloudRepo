@@ -27,7 +27,7 @@
         <form:form onsubmit="return checkForm(this);" method="post" modelAttribute="appVendorDetails" action="registerAppProvider.do" class="register">
             <h1>Mobile App Provider Registration Form</h1>
             
-            <p >* Obligatory fields</p>
+            <p>* Obligatory fields</p>
             <fieldset class="row1">
                 <legend>Account Details
                 </legend>
@@ -46,9 +46,10 @@
                     <form:errors path="userName" cssStyle="color: #ff0000;"/>
                     
                     
-               </div></fieldset>
+               </div>
+               </fieldset>
                <br></br>
-               <fieldset class="row1">
+               <fieldset>
                	<div>
                     <label>Password *
                     </label>
@@ -68,7 +69,7 @@
                    </div>
                 
             </fieldset>
-         <fieldset class="row2">
+         <fieldset class="row1">
                 <legend>Company Details
                 </legend>
                 <p>
@@ -100,7 +101,7 @@
                 </p>
             </fieldset>
                 
-            </fieldset>
+          
             <fieldset class="row4">
                 <legend>Terms and Mailing
                 </legend>
