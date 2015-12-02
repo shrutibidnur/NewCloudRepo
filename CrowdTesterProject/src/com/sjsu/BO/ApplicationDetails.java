@@ -30,12 +30,6 @@ public class ApplicationDetails {
 	@Column(name = "TEST_TYPE", nullable = true)
 	private String testType;
 	
-	/*@Column(name = "PRODUCT_OS", nullable = false)
-	private String productOS;
-	*/
-//	@Column(name = "TESTING", nullable = true)
-//	private String testing;
-//	
 	@Column(name = "TEST_DEADLINE", nullable = false)
 	private String testDeadLine;
 	
@@ -47,9 +41,6 @@ public class ApplicationDetails {
 	
 	@Column(name = "APP_DOCUMENT", nullable = true)
 	private String appDocument;
-	
-//	@Column(name = "APP_PROVIDER", nullable = false)
-//	private String appProvider;
 	
 	public AppVendorDetails getAppVendorUsername() {
 		return appVendorUsername;

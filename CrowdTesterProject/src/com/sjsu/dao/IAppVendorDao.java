@@ -1,8 +1,12 @@
 package com.sjsu.dao;
 
+import java.util.List;
+
 import com.sjsu.BO.AppPlatformDetailsBO;
 import com.sjsu.BO.AppVendorDetails;
 import com.sjsu.BO.ApplicationDetails;
+import com.sjsu.BO.BugDetailsBO;
+import com.sjsu.BO.TesterDetails;
 
 public interface IAppVendorDao {
 	
@@ -13,4 +17,16 @@ public interface IAppVendorDao {
 	String saveAppDetails(ApplicationDetails uploadAppBO);
 
 	String saveAppPlatformDetails(AppPlatformDetailsBO appPlatformDetailsBO);
+
+	List<ApplicationDetails> getApplicationDetails(
+			AppVendorDetails appVendorDetails);
+
+	List<BugDetailsBO> viewBugsForAppProvider(
+			ApplicationDetails testApplicationDetails);
+
+	String changeBugStatus(String bugId, String status, String detectedBy);
+
+	String deleteAssignedBugs(String bugId, String status, String detectedBy);
+
+	List<TesterDetails> viewTesterDetailsAssigned(String appID);
 }

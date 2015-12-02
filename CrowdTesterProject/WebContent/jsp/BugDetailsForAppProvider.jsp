@@ -12,7 +12,8 @@
     <meta name="author" content="">
 
     <title>Billing Form</title>
-
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../javascript/jquery-1.8.1.min.js"></script>  
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
@@ -72,14 +73,14 @@
             <!-- /.navbar-top-links -->
 
             <!-- CUT AND PASTER IN SEPERATE JSP -->
-            <jsp:include page="TesterSideBar.jsp" flush="true" />
+            <jsp:include page="AppVendorSideBar.jsp" flush="true" />
             <!-- /.navbar-static-side -->
         </nav>
 
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Assigned Application Details</h1>
+                    <h1 class="page-header">Logged Bug Details</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -87,31 +88,35 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                       <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
+                       <form:form id="viewBugs" method="post" modelAttribute="bugList" action="#">
                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
             <br/><br/>
 	<table width="100%" class='order-table table'>
 		<thead>
 		<tr>
 			<th>Application Name</th>
-			<th> Discription</th>
-			<th>Dead Line</th>
-			<th>Download URL</th>
-			<th>App Provider</th>
-			<th>Status</th>
+			<th> Bug ID</th>
+			<th> DETECTED BY</th>
+			<th>SEVERITY</th>
+			<th>DETECTED DATE</th>
+			<th>DESCRIPTION</th>
+			<th>STATUS</th>
 		</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="applications" items="${appDetailsList}">
+			<c:forEach var="bug" items="${bugList}">
 			<tr>
-			<td><c:out value="${applications.applicationId.appName}"></c:out></td>
-			<td><c:out value="${applications.applicationId.description}"></c:out></td>
-			<td><c:out value="${applications.applicationId.testDeadLine}"></c:out></td>
-			<td><c:out value="${applications.applicationId.downloadLink}"></c:out></td>
-			<td><c:out value="${applications.applicationId.appVendorUsername.userName}"></c:out></td>
-			<td><c:out value="${applications.status}"></c:out></td>
-			<td><a href="showReportBugsPage.do?appID=${applications.applicationId.applicationID}&appName=${applications.applicationId.appName}">Report Bugs</a></td>
-			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td>
+			<td><c:out value="${bug.appDetails.applicationID}"></c:out></td>
+			<td><c:out value="${bug.bugId}"></c:out></td>
+			<td><c:out value="${bug.testerDetails.userName}"></c:out></td>
+			<td><c:out value="${bug.severity}"></c:out></td>
+			<td><c:out value="${bug.detectedDate}"></c:out></td>
+			<td><c:out value="${bug.bugDetails}"></c:out></td>
+			<td style="color: red;"><c:out value="${bug.bugStatus}"></c:out> <br/>
+				<a href="bugAccept.do?bugId=${bug.bugId}&status=ACCEPTED&detectedBy=${bug.testerDetails.userName}&appId=${bug.appDetails.applicationID}">Accept</a> | <a href="bugReject.do?bugId=${bug.bugId}&status=REJECTED&detectedBy=${bug.testerDetails.userName}&appId=${bug.appDetails.applicationID}">Reject</a>
+			</td>
+			<%-- <td><a href="showReportBugsPage.do?appID=${applications.applicationId.applicationID}&appName=${applications.applicationId.appName}">Report Bugs</a></td>
+			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td> --%>
 			</tr>
 			</c:forEach>
 		
@@ -156,5 +161,3 @@
             
             
             
-            
-

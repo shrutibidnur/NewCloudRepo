@@ -72,6 +72,7 @@ public class TesterController {
 		//session.setAttribute("sessionTesterDetails", testerDetails);
 		session.getAttribute("testerDetails");
 		System.out.println("SESSION DASHBOARD" +session.getAttribute("sessionTesterDetails"));
+		testerDetails = (TesterDetails) session.getAttribute("sessionTesterDetails");
 		model.addAttribute("testerDetails", testerDetails);
 		
 		return "TesterDashboard";

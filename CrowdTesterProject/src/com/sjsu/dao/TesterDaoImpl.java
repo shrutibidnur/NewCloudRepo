@@ -67,8 +67,9 @@ public class TesterDaoImpl implements ITesterDao{
 				.setParameter("userName",userName);
 				List appList = query.list();
 				System.out.println(appList);
+				
+		if(!appList.isEmpty()) {
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
-
 		Disjunction disjunction = Restrictions.disjunction();
 		Iterator<String> iterator = appList.iterator();
 		while (iterator.hasNext()) {
@@ -77,6 +78,7 @@ public class TesterDaoImpl implements ITesterDao{
 		}
 		criteria.add(disjunction);
         applicationDetailsList = (List<ApplicationDetails>) criteria.list();
+		}
         System.out.println(applicationDetailsList);
         session.getTransaction().commit();
 		return applicationDetailsList;
@@ -89,7 +91,7 @@ public class TesterDaoImpl implements ITesterDao{
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(ApplicationDetails.class);
-		criteria.add(Restrictions.eq("appLanguage",preferredTestLang).ignoreCase());
+		//criteria.add(Restrictions.eq("appLanguage",preferredTestLang).ignoreCase());
 		applicationDetailsList = (List<ApplicationDetails>) criteria.list();
 		session.getTransaction().commit();
 		return applicationDetailsList;

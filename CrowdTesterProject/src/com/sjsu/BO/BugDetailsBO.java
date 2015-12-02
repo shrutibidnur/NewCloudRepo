@@ -102,8 +102,11 @@ public class BugDetailsBO {
 		return "BugDetailsBO [bugId=" + bugId + ", severity=" + severity
 				+ ", bugDetails=" + bugDetails + ", detectedDate="
 				+ detectedDate + ", testerDetails=" + testerDetails
-				+ ", appDetails=" + appDetails + "]";
+				+ ", appDetails=" + appDetails + ", bugStatus=" + bugStatus
+				+ "]";
 	}
+
+	
 	
 
 }
