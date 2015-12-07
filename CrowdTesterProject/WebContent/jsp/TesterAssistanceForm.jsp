@@ -20,7 +20,7 @@
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
     <!-- <link id="theme" rel="stylesheet" type="text/css" href="../css/profileHeaderStyle.css" title="theme" /> -->
     
@@ -141,4 +141,7 @@
     <script src="../javascript/sb-admin-2.js"></script>
 	
 	</body>
+	<footer class="clearFix">
+  
+</footer>
 </html>

@@ -10,9 +10,9 @@
 <script type="text/javascript" language="javascript" src="../javascript/jquery-1.8.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/view.css" media="all"/>
 <script type="text/javascript" src="../javascript/view.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/Registration.css"/> 
+<!-- <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>  -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
+<link rel="stylesheet" href="../css/main.css">
 
 </head>
 
@@ -23,7 +23,7 @@
 	<div id="form_container">
 	
 		<h1><a>Payment Scheme</a></h1>
-		<form  class="appnitro"  method="post" action="">
+		<form class="appnitro"  method="post" action="">
 					<div class="form_description">
 			<h2>Payment Scheme</h2>
 			<!-- <p>Please describe your query in detail.</p> -->
@@ -76,7 +76,7 @@
 		</form>	
 		
 	</div>
-	<img id="bottom" src="bottom.png" alt=""/>
+	<!-- <img id="bottom" src="bottom.png" alt=""/> -->
 	</form:form>
 	</body>
 </html>

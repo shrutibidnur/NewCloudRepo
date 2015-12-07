@@ -7,9 +7,15 @@
     <head>
         <title>Create new Task Form</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" href="../css/Registration.css"/>
+        <!-- <link rel="stylesheet" type="text/css" href="../css/Registration.css"/> -->
+        <link rel="stylesheet" href="../css/main.css">
         <script type="text/javascript">
 
+        
+     
+        
+        
+        
   function checkForm(form)
   {
     if(!form.terms.checked) {
@@ -227,10 +233,10 @@
                 </p>
             </fieldset>
             <p> <div align="center"><span id="error" class="error" style="color:red" >${ERROR}</span></div></p>
-            <div><button class="button">Continue Uploading &raquo;</button></div>
+            <div align="center"><button class="button">Continue Uploading &raquo;</button></div>
         
            </form:form>
           
     </body>
-    
+     
 </html>

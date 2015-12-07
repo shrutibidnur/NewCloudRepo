@@ -141,7 +141,7 @@ public class AppVendorController {
 		oldAppVendorDetails.setCompanyName(appVendorDetails.getCompanyName());
 		oldAppVendorDetails.setContactEmail(appVendorDetails.getContactEmail());
 		//oldAppVendorDetails.setAge(appVendorDetails.getPhoneNumber());
-		oldAppVendorDetails.setAddress(appVendorDetails.getCompanyWebsite());
+		oldAppVendorDetails.setCompanyWebsite(appVendorDetails.getCompanyWebsite());
 		if (appVendorDetails.getPhoneNumber() != null) {
 			oldAppVendorDetails.setPhoneNumber(appVendorDetails.getPhoneNumber());
 		}

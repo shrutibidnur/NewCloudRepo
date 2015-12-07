@@ -25,6 +25,8 @@
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" language="javascript" src="../javascript/tablefilter.js"></script> 
+    
+     <link href="../css/tableStyle.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,24 +92,21 @@
                        <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
             <br/><br/>
+            <div class="CSSTableGenerator" >
 	<table width="100%" class='order-table table'>
-		<thead>
-		<tr>
-			<th>Application Name</th>
-			<!-- <th>Product OS</th> -->
-			<th> Description</th>
-			<th>Dead Line</th>
-			<th>Download URL</th>
-			<th>App Provider</th>
-			<th>App testing Language</th>
-</tr>
-		</thead>
-		<tbody>
+		<tr height="70px" align="center">
+			<td>Application Name</td>
+			<td> Description</td>
+			<td>Dead Line</td>
+			<td>Download URL</td>
+			<td>App Provider</td>
+			<td>App testing Language</td>
+			<td>&nbsp;</td>
+		</tr>
 			<c:forEach var="applications" items="${appDetailsList}">
-			<tr>
+			<tr height="50px">
 			<td><c:out value="${applications.appName}"></c:out></td>
 			<td><c:out value="${applications.description}"></c:out></td>
-			<%-- <td><c:out value="${applications.productOS}"></c:out></td> --%>
 			<td><c:out value="${applications.testDeadLine}"></c:out></td>
 			<td><c:out value="${applications.downloadLink}"></c:out></td>
 			<td><c:out value="${applications.appVendorUsername.userName}"></c:out></td>
@@ -115,9 +114,8 @@
 			<td><a href="testThisApp.do?appID=${applications.applicationID}">Test This App</a></td>
 			</tr>
 			</c:forEach>
-		</tbody>
 </table>
-
+</div>
 </form:form>
 <p><div align="center"><span class="error" style="color:red" >${ERROR}</span></div></p>                       
                         

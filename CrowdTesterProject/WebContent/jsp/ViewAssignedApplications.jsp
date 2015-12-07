@@ -25,6 +25,8 @@
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" language="javascript" src="../javascript/tablefilter.js"></script> 
+    
+     <link href="../css/tableStyle.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,21 +92,23 @@
                        <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
             <br/><br/>
+            <div class="CSSTableGenerator" >
 	<table width="100%" class='order-table table'>
-		<thead>
-		<tr>
-			<th>Application Name</th>
-			<th> Description</th>
-			<th>Dead Line</th>
-			<th>Download URL</th>
-			<th>App Provider</th>
-			<th>App testing Language</th>
-			<th>Status</th>
+		
+		<tr height="70px" align="center">
+			<td>Application Name</td>
+			<td> Description</td>
+			<td>Dead Line</td>
+			<td>Download URL</td>
+			<td>App Provider</td>
+			<td>App testing Language</td>
+			<td>Status</td>
+			<td>&nbsp;</td>
+        	<td>&nbsp;</td>
 		</tr>
-		</thead>
-		<tbody>
+		
 			<c:forEach var="applications" items="${appDetailsList}">
-			<tr>
+			<tr height="50px">
 			<td><c:out value="${applications.applicationId.appName}"></c:out></td>
 			<td><c:out value="${applications.applicationId.description}"></c:out></td>
 			<td><c:out value="${applications.applicationId.testDeadLine}"></c:out></td>
@@ -116,13 +120,11 @@
 			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td>
 			</tr>
 			</c:forEach>
-		
-		</tbody>
 
 
 
 	</table>
-
+</div>
 </form:form>
                        
                         

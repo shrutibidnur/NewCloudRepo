@@ -26,6 +26,8 @@
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" language="javascript" src="../javascript/tablefilter.js"></script> 
+    
+     <link href="../css/tableStyle.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,21 +93,19 @@
                        <form:form id="viewBugs" method="post" modelAttribute="bugList" action="#">
                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
             <br/><br/>
+            <div class="CSSTableGenerator" >
 	<table width="100%" class='order-table table'>
-		<thead>
-		<tr>
-			<th>Application Name</th>
-			<th> Bug ID</th>
-			<th> DETECTED BY</th>
-			<th>SEVERITY</th>
-			<th>DETECTED DATE</th>
-			<th>DESCRIPTION</th>
-			<th>STATUS</th>
+		<tr height="70px" align="center">
+			<td>Application Name</td>
+			<td> Bug ID</td>
+			<td> DETECTED BY</td>
+			<td>SEVERITY</td>
+			<td>DETECTED DATE</td>
+			<td>DESCRIPTION</td>
+			<td>STATUS</td>
 		</tr>
-		</thead>
-		<tbody>
 			<c:forEach var="bug" items="${bugList}">
-			<tr>
+			<tr height="50px">
 			<td><c:out value="${bug.appDetails.applicationID}"></c:out></td>
 			<td><c:out value="${bug.bugId}"></c:out></td>
 			<td><c:out value="${bug.testerDetails.userName}"></c:out></td>
@@ -115,17 +115,12 @@
 			<td style="color: red;"><c:out value="${bug.bugStatus}"></c:out> <br/>
 				<a href="bugAccept.do?bugId=${bug.bugId}&status=ACCEPTED&detectedBy=${bug.testerDetails.userName}&appId=${bug.appDetails.applicationID}">Accept</a> | <a href="bugReject.do?bugId=${bug.bugId}&status=REJECTED&detectedBy=${bug.testerDetails.userName}&appId=${bug.appDetails.applicationID}">Reject</a>
 			</td>
-			<%-- <td><a href="showReportBugsPage.do?appID=${applications.applicationId.applicationID}&appName=${applications.applicationId.appName}">Report Bugs</a></td>
-			<td><a href="showViewBugsPage.do?appID=${applications.applicationId.applicationID}">View Bugs</a></td> --%>
 			</tr>
 			</c:forEach>
-		
-		</tbody>
-
 
 
 	</table>
-
+</div>
 </form:form>
                        
                         

@@ -21,6 +21,7 @@
 
     <!-- Custom CSS -->
     <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../css/tableStyle.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -79,7 +80,7 @@
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Assigned Application Details</h1>
+                    <h1 class="page-header">Tester Bug Details</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -90,20 +91,18 @@
                        <form:form id="viewBugs" method="post" modelAttribute="bugDetails" action="#">
                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">	
             <br/><br/>
+             <div class="CSSTableGenerator" >
 	<table width="100%" class='order-table table'>
-		<thead>
-		<tr>
-			<th>Application Name</th>
-			<th> Bug ID</th>
-			<th>SEVERITY</th>
-			<th>DETECTED DATE</th>
-			<th>DESCRIPTION</th>
-			<th>STATUS</th>
+		<tr height="70px">
+			<td>Application Name</td>
+			<td> Bug ID</td>
+			<td>SEVERITY</td>
+			<td>DETECTED DATE</td>
+			<td>DESCRIPTION</td>
+			<td>STATUS</td>
 		</tr>
-		</thead>
-		<tbody>
 			<c:forEach var="bug" items="${bugList}">
-			<tr>
+			<tr height="50px">
 			<td><c:out value="${bug.appDetails.applicationID}"></c:out></td>
 			<td><c:out value="${bug.bugId}"></c:out></td>
 			<td><c:out value="${bug.severity}"></c:out></td>
@@ -115,12 +114,12 @@
 			</tr>
 			</c:forEach>
 		
-		</tbody>
 
 
 
 	</table>
-
+	
+</div>
 </form:form>
                        
                         

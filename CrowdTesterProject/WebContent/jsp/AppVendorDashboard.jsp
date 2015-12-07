@@ -32,7 +32,13 @@
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    
+    <link href="../css/tableStyle.css" rel="stylesheet">
+    
+    <link href="../css/Registration.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/main.css">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,17 +68,17 @@
             <ul class="nav navbar-top-links navbar-right">
                 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        
-                        <li><a href="../login/showLogin.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                      
-                        </li>
-                    </ul>
-                    
-                </li>
+			                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			                      <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+			                  </a>
+			                  <ul class="dropdown-menu dropdown-user">
+			                      
+			                      
+			                      <li><a href="../login/showLogin.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+			                      </li>
+			                  </ul>
+			                  <!-- /.dropdown-user -->
+			              </li>
                
             </ul>
             <!-- /.navbar-top-links -->
@@ -103,34 +109,36 @@
        
         
         <div id="box">
-  <h3>Personal Activity Plan</h3>
+  <h3>Your Applications</h3>
   <form:form id="viewApplications" method="post" modelAttribute="appDetailsList" action="#">
+  <div class="CSSTableGenerator" >
   <table width="100%" class='order-table table'>
-    <thead>
-      <tr>
-        <th>App ID</th>
-        <th>App Name</th>
-        <th>Description</th>
-        <th>Test DeadLine</th>
-        <th>Download Link</th>
-        <th>Cost Paid</th>
+      <tr height="70px">
+        <td>App ID</td>
+        <td>App Name</td>
+        <td>Description</td>
+        <td>Test DeadLine</td>
+        <td>Download Link</td>
+        <td>Cost Paid</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
-    </thead>
-    <tbody>
+   
       <c:forEach var="applications" items="${appDetailsList}">
-      	<tr>
+      	<tr height="50px">
       		<td><c:out value="${applications.applicationID}"></c:out></td>
 			<td><c:out value="${applications.appName}"></c:out></td>
 			<td><c:out value="${applications.description}"></c:out></td>
 			<td><c:out value="${applications.testDeadLine}"></c:out></td>
-			<td><c:out value="${applications.downloadLink}"></c:out></td>
+			<td><a href="#"><c:out value="${applications.downloadLink}"></c:out></a></td>
 			<td><c:out value="${applications.cost}"></c:out></td>
 			<td><a href="viewBugsForAppProvider.do?appID=${applications.applicationID}">View Bugs</a></td>
 			<td><a href="viewTesters.do?appID=${applications.applicationID}">View Testers</a></td>
 			</tr>
       </c:forEach>
-    </tbody>
+    
   </table>
+  </div>
   </form:form>
 </div>
         
@@ -156,9 +164,9 @@
     <!-- Custom Theme JavaScript -->
     <script src="../javascript/sb-admin-2.js"></script>
 </div>
-<footer class="clearFix">
-  
-</footer>
 </body>
 
+ <footer class="clearFix">
+  
+</footer>
 </html>

@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head class="clearFix">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+
+	<link rel="stylesheet" href="../css/loginReset.css">
+
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/print.css" media="print">
+	<link rel="stylesheet" href="../css/style.css">
+
+
 
     <title>Billing Form</title>
 
@@ -19,7 +30,8 @@
 
     <!-- Custom CSS -->
     <link href="../css/sb-admin-2.css" rel="stylesheet">
-
+    <link href="../css/timeline.css" rel="stylesheet">
+	
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -82,7 +94,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Upload Your Application</h1>
+                    <!-- <h1 class="page-header">Upload Your Application</h1> -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -120,5 +132,7 @@
     <script src="../javascript/sb-admin-2.js"></script>
 
 </body>
-
+<footer class="clearFix">
+  
+</footer>
 </html>
